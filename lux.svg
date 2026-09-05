@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente de fundo roxo moderno -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b133ff" />
+      <stop offset="100%" stop-color="#581c87" />
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo com cantos arredondados -->
+  <rect width="512" height="512" rx="115" fill="url(#bgGrad)" />
+
+  <!-- Símbolo do Play perfeitamente centralizado -->
+  <path d="M 185 145 
+           L 365 241 C 379 248, 379 264, 365 271 
+           L 185 367 C 171 374, 155 364, 155 348 
+           L 155 164 C 155 148, 171 138, 185 145 Z" 
+        fill="none" stroke="#ffffff" stroke-width="32" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Letra P perfeitamente centralizada dentro do play -->
+  <path d="M 220 300 L 220 210 
+           C 220 210, 270 210, 270 235 
+           C 270 260, 220 260, 220 260" 
+        fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

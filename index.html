@@ -344,6 +344,70 @@
     @media(max-width:520px){.experience-section{padding:62px 0 65px}.experience-copy h2{font-size:clamp(2.3rem,9vw,3.1rem)}.experience-copy>p:not(.experience-footnote){font-size:.98rem}.experience-devices{gap:8px;margin:23px 0}.experience-devices span{padding:9px 10px;font-size:.73rem}.experience-devices svg{width:16px;height:16px}.device-advisor{width:100%;font-size:.78rem;min-height:54px;padding:10px}.device-stage{min-height:362px;border-radius:24px}.device-stage-label{top:15px;left:15px;font-size:.6rem}.device-stage-side{right:9px;top:19%;font-size:.5rem}.device-stage-bottom{left:13px;bottom:13px;font-size:.67rem;padding:8px 11px}.device-stage-bottom strong{font-size:.75rem}.device-boy{width:min(108%,430px);max-height:94%;bottom:-25px}.partner-gallery{margin-top:56px}.partner-gallery-heading h3{font-size:1.85rem}.partner-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.app-logo-frame{height:128px}.app-logo-card{padding:8px;border-radius:15px}.app-meta{font-size:.74rem;padding:10px 3px 3px}.partner-gallery-disclaimer{text-align:left;justify-content:flex-start}.partner-gallery-grid .app-logo-card:last-child{grid-column:span 2;max-width:calc(50% - 5px);width:100%;justify-self:center}}
     @media(prefers-reduced-motion:reduce){.device-boy,.app-logo-card{transition:none}.device-stage:hover .device-boy{transform:translateX(-50%)}}
 
+  
+    /* Partner-logo polish — scope deliberately limited to the devices gallery. */
+    .partner-gallery{margin-top:88px}
+    .partner-gallery-heading{margin-bottom:25px}
+    .partner-gallery-heading h3{font-size:clamp(1.9rem,3vw,2.65rem);line-height:1.18}
+    .partner-gallery-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}
+    .partner-gallery-grid .app-logo-card{
+      display:flex;flex-direction:column;min-width:0;min-height:214px;padding:9px;
+      border-radius:18px;background:#171021;border:1px solid rgba(200,154,239,.16);
+      box-shadow:inset 0 1px rgba(255,255,255,.035);
+      transition:border-color .2s ease,background .2s ease,transform .2s ease;
+    }
+    .partner-gallery-grid .app-logo-card:hover{
+      transform:translateY(-3px);border-color:rgba(201,143,250,.55);
+      background:#20152e;
+    }
+    .partner-gallery-grid .app-logo-frame{
+      background:#0c0912;border:1px solid rgba(255,255,255,.045);
+      border-radius:12px;height:148px;width:100%;display:grid;place-items:center;
+      overflow:hidden;padding:12px;
+    }
+    .partner-gallery-grid .app-logo-frame img{
+      display:block;height:100%;width:100%;max-width:180px;max-height:124px;
+      object-fit:contain;object-position:center;
+    }
+    .partner-gallery-grid .app-meta{
+      flex:1;display:flex;flex-direction:column;align-items:flex-start;
+      justify-content:center;gap:3px;padding:12px 7px 5px;color:#f5effb;
+      min-width:0;line-height:1.2;
+    }
+    .partner-gallery-grid .app-meta-kicker{
+      font:700 .55rem/1.2 "DM Sans",sans-serif;letter-spacing:.095em;color:#a18daf;
+    }
+    .partner-gallery-grid .app-meta strong{
+      font:700 .91rem/1.26 "Outfit",sans-serif;letter-spacing:-.018em;
+      white-space:normal;overflow-wrap:break-word;
+    }
+    .partner-gallery-grid .app-logo-card:nth-child(1) img{max-height:112px}
+    .partner-gallery-grid .app-logo-card:nth-child(2) img{max-height:112px}
+    .partner-gallery-grid .app-logo-card:nth-child(3) img{max-width:174px}
+    .partner-gallery-grid .app-logo-card:nth-child(4) img{max-width:174px}
+    .partner-gallery-grid .app-logo-card:nth-child(5) img{max-height:112px}
+    .partner-gallery-disclaimer{max-width:810px;margin:19px auto 0}
+    @media(max-width:960px){
+      .partner-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media(max-width:620px){
+      .partner-gallery{margin-top:52px}
+      .partner-gallery-grid{
+        display:flex;overflow-x:auto;overflow-y:hidden;gap:12px;
+        scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;
+        padding:2px 2px 13px;margin:0 -2px;
+        scrollbar-width:thin;scrollbar-color:#65417e transparent;
+      }
+      .partner-gallery-grid .app-logo-card{flex:0 0 min(66vw,240px);scroll-snap-align:start;min-height:211px}
+      .partner-gallery-grid .app-logo-frame{height:142px}
+      .partner-gallery-grid .app-logo-card:last-child{
+        grid-column:auto;width:auto;max-width:none;justify-self:auto;
+      }
+      .partner-gallery-heading p{font-size:.87rem}
+      .partner-gallery-disclaimer{margin-top:11px}
+    }
+    @media(prefers-reduced-motion:reduce){.partner-gallery-grid .app-logo-card{transition:none}}
+
   </style>
 </head>
 <body>
@@ -446,11 +510,26 @@
             <p>Conheça algumas opções utilizadas com a Lux Play. Podemos ajudar você a identificar a mais adequada para seu dispositivo.</p>
           </div>
           <div class="partner-gallery-grid" aria-label="Aplicativos de reprodução compatíveis">
-            <div class="app-logo-card"><div class="app-logo-frame"><img src="images.png" alt="Logotipo do Smarters Player Lite" loading="lazy" decoding="async"></div><div class="app-meta"><strong>Smarters Player Lite</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
-            <div class="app-logo-card"><div class="app-logo-frame"><img src="unnamed.webp" alt="Logotipo do OneX" loading="lazy" decoding="async"></div><div class="app-meta"><strong>OneX</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
-            <div class="app-logo-card"><div class="app-logo-frame"><img src="logo_500x300.png" alt="Logotipo do RX Purple" loading="lazy" decoding="async"></div><div class="app-meta"><strong>RX Purple</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
-            <div class="app-logo-card"><div class="app-logo-frame"><img src="lotus-logo.webp" alt="Logotipo do Lótus" loading="lazy" decoding="async"></div><div class="app-meta"><strong>Lótus</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
-            <div class="app-logo-card"><div class="app-logo-frame"><img src="images.jpg" alt="Logotipo do Vuser" loading="lazy" decoding="async"></div><div class="app-meta"><strong>Vuser</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
+            <article class="app-logo-card">
+              <div class="app-logo-frame"><img src="images.png" alt="Marca Smarters Player Lite" loading="lazy" decoding="async"></div>
+              <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>Smarters Player Lite</strong></div>
+            </article>
+            <article class="app-logo-card">
+              <div class="app-logo-frame"><img src="unnamed.webp" alt="Marca OneX" loading="lazy" decoding="async"></div>
+              <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>OneX</strong></div>
+            </article>
+            <article class="app-logo-card">
+              <div class="app-logo-frame"><img src="logo_500x300.png" alt="Marca RX Purple" loading="lazy" decoding="async"></div>
+              <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>RX Purple</strong></div>
+            </article>
+            <article class="app-logo-card">
+              <div class="app-logo-frame"><img src="lotus-logo.webp" alt="Marca Lótus" loading="lazy" decoding="async"></div>
+              <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>Lótus</strong></div>
+            </article>
+            <article class="app-logo-card">
+              <div class="app-logo-frame"><img src="images.jpg" alt="Marca Vuser" loading="lazy" decoding="async"></div>
+              <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>Vuser</strong></div>
+            </article>
           </div>
           <p class="partner-gallery-disclaimer"><i data-lucide="info" aria-hidden="true"></i> Esses aplicativos são de terceiros. Disponibilidade, licenças e recursos variam conforme o dispositivo; as marcas pertencem aos respectivos titulares.</p>
         </div>

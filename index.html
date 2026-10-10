@@ -1,571 +1,359 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUX Play - A Central de Streaming que Não Trava</title>
-    <!-- Ícone oficial configurado -->
-    <link rel="icon" href="lux.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #08050d;
-            --surface: #130e1c;
-            --surface-glass: rgba(25, 18, 38, 0.7);
-            --primary: #9333ea;
-            --primary-hover: #a855f7;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
-            --neon-glow: 0 0 20px rgba(147, 51, 234, 0.5);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
-        
-        .bg-glow { position: fixed; top: -20%; left: 50%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(147,51,234,0.15) 0%, transparent 70%); transform: translateX(-50%); z-index: -1; pointer-events: none; }
-        a { text-decoration: none; color: inherit; }
-        
-        /* Botões */
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; border: none; }
-        .btn-primary { background: var(--primary); color: white; box-shadow: var(--neon-glow); }
-        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-3px); box-shadow: 0 0 30px rgba(168, 85, 247, 0.7); }
-        .btn-outline { background: var(--surface-glass); border: 1px solid var(--border); color: white; backdrop-filter: blur(10px); }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--primary); }
-        .btn-wpp { background: #25D366; color: white; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
-        .btn-wpp:hover { background: #20bd5a; transform: translateY(-3px); }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        section { padding: 80px 0; }
-        .sec-alt { background: rgba(19, 14, 28, 0.4); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-        /* Header & Menu unificado à direita */
-        header { padding: 16px 0; border-bottom: 1px solid var(--border); background: rgba(8, 5, 13, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        
-        /* Logotipo com lux.svg */
-        .logo { display: flex; align-items: center; gap: 12px; }
-        .logo img { width: 38px; height: 38px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4); }
-        .logo-text { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.5px; color: white; font-family: 'Inter', sans-serif; }
-        .logo-text span { color: var(--primary-hover); }
-
-        /* Container da direita (Menu + Botões) */
-        .header-right { display: flex; align-items: center; gap: 32px; }
-        .nav-menu { display: flex; gap: 24px; list-style: none; align-items: center; }
-        .nav-menu a { color: var(--text-muted); font-size: 0.92rem; font-weight: 600; transition: color 0.2s; }
-        .nav-menu a:hover { color: white; }
-
-        .header-actions { display: flex; gap: 10px; align-items: center; }
-
-        /* Hero Section */
-        .hero { text-align: center; padding: 100px 0 60px; position: relative; }
-        .badge { display: inline-block; padding: 6px 16px; background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.3); border-radius: 100px; color: var(--primary-hover); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; letter-spacing: -2px; }
-        .hero h1 span { background: linear-gradient(to right, #c084fc, #9333ea); -webkit-background-clip: text; color: transparent; }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
-
-        /* Números Oficiais */
-        .content-stats { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 40px; }
-        .stat-badge { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); padding: 14px 24px; border-radius: 16px; font-size: 1rem; font-weight: 800; color: #c084fc; display: flex; align-items: center; gap: 10px; }
-        .stat-badge span { color: white; font-size: 1.3rem; }
-
-        /* Grids Gerais & Ícones */
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; }
-        .section-title p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
-        
-        .card { background: var(--surface-glass); border: 1px solid var(--border); border-radius: 20px; padding: 32px; backdrop-filter: blur(12px); transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
-        .card:hover { border-color: var(--primary); transform: translateY(-4px); }
-        
-        .card-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.3); display: grid; place-items: center; color: var(--primary-hover); margin-bottom: 20px; flex-shrink: 0; }
-        .card-icon svg { width: 22px; height: 22px; }
-
-        .card h3 { font-size: 1.2rem; color: white; margin-bottom: 12px; font-weight: 800; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
-
-        /* Passos */
-        .step-num { font-size: 2.5rem; font-weight: 900; background: linear-gradient(to right, #c084fc, #9333ea); -webkit-background-clip: text; color: transparent; margin-bottom: 16px; }
-
-        /* Seletor de Planos */
-        .plan-toggle { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; background: var(--surface); padding: 6px; border-radius: 100px; width: fit-content; margin-inline: auto; border: 1px solid var(--border); }
-        .toggle-btn { padding: 10px 24px; border-radius: 100px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; }
-        .toggle-btn.active { background: var(--primary); color: white; box-shadow: var(--neon-glow); }
-
-        /* Grade 2x2 Centralizada e Compacta */
-        .plans-grid { display: none; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 750px; margin: 0 auto; }
-        .plans-grid.active { display: grid; }
-        
-        .price-card { background: var(--surface-glass); border: 1px solid var(--border); border-radius: 20px; padding: 24px; position: relative; text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .price-card:hover { border-color: var(--primary-hover); transform: translateY(-4px); }
-        .price-card.popular { border-color: var(--primary); box-shadow: inset 0 0 30px rgba(147, 51, 234, 0.1), 0 8px 24px rgba(0,0,0,0.4); }
-        .pop-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 4px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
-        
-        .duration { font-size: 1.1rem; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; }
-        .price { font-size: 2.5rem; font-weight: 900; color: white; margin-bottom: 4px; line-height: 1; }
-        .discount { font-size: 0.85rem; color: #22c55e; font-weight: 800; margin-bottom: 16px; min-height: 18px; }
-        .price-card .btn { margin-top: auto; width: 100%; padding: 12px; font-size: 0.9rem; }
-
-        /* FAQ Accordion */
-        .faq-container { max-width: 800px; margin: 0 auto; display: grid; gap: 14px; }
-        .faq-item { background: var(--surface-glass); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; backdrop-filter: blur(10px); transition: 0.3s; }
-        .faq-item:hover { border-color: rgba(147, 51, 234, 0.4); }
-        .faq-item details { width: 100%; }
-        .faq-item summary { padding: 20px 24px; font-weight: 700; font-size: 1.05rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: white; }
-        .faq-item summary::-webkit-details-marker { display: none; }
-        .faq-item summary::after { content: "+"; font-size: 1.4rem; color: var(--primary-hover); font-weight: 400; transition: transform 0.3s; }
-        .faq-item details[open] summary::after { transform: rotate(45deg); }
-        .faq-content { padding: 0 24px 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
-
-        /* Rodapé Profissional */
-        .footer-pro { background: #050308; border-top: 1px solid var(--border); padding: 70px 0 30px; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
-        .footer-col h4 { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: white; margin-bottom: 20px; font-weight: 800; }
-        .footer-col ul { list-style: none; display: grid; gap: 12px; }
-        .footer-col a { color: var(--text-muted); font-size: 0.92rem; transition: color 0.2s; }
-        .footer-col a:hover { color: var(--primary-hover); }
-        .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; color: var(--text-muted); font-size: 0.85rem; }
-
-        /* Modal Tutorial PC */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 1000; display: none; place-items: center; padding: 24px; }
-        .modal-overlay.active { display: grid; }
-        .modal-content { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px; max-width: 500px; width: 100%; position: relative; }
-        .close-modal { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
-        .close-modal:hover { color: white; }
-        .tutorial-steps { list-style: none; margin: 24px 0 32px; }
-        .tutorial-steps li { display: flex; gap: 16px; margin-bottom: 16px; font-size: 1.05rem; align-items: flex-start; }
-        .step-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; flex-shrink: 0; }
-
-        /* WPP Flutuante */
-        .wpp-float { display: none; position: fixed; bottom: 24px; right: 24px; z-index: 100; width: 56px; height: 56px; background: #25D366; border-radius: 50px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); align-items: center; justify-content: center; }
-        
-        @media (max-width: 1050px) {
-            .nav-menu { display: none; }
-        }
-        @media (max-width: 880px) {
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 768px) {
-            .plans-grid { grid-template-columns: 1fr; max-width: 350px; }
-            .header-actions .btn-outline { display: none; }
-            .content-stats { flex-direction: column; gap: 12px; align-items: center; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .wpp-float { display: flex; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a0613">
+  <meta name="description" content="Lux Play: filmes, séries e canais em um só lugar. Conheça os planos a partir de R$ 20 e solicite um teste grátis de até 6 horas pelo WhatsApp.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Lux Play — O entretenimento é seu">
+  <meta property="og:description" content="Mais conteúdo, mais possibilidades. Planos a partir de R$ 20 e teste grátis de até 6 horas.">
+  <meta property="og:url" content="https://luxplay.vercel.app/">
+  <link rel="canonical" href="https://luxplay.vercel.app/">
+  <link rel="icon" href="/lux.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/lux.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Lux Play | Filmes, séries, TV e muito mais</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080611;--surface:#151020;--surface2:#21182f;--white:#fcfaff;--muted:#b8aec9;--muted2:#898097;--purple:#a74aff;--purple2:#6b2bea;--border:rgba(209,177,255,.17);--radius:22px;--green:#32d583}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:var(--bg);font:16px/1.55 "DM Sans",system-ui,-apple-system,sans-serif;color:var(--white);overflow-x:hidden}
+    body:before{content:"";position:absolute;z-index:-1;left:0;top:0;width:100%;height:1000px;background:radial-gradient(ellipse at 80% 16%,rgba(126,48,255,.26),transparent 47%),radial-gradient(ellipse at 8% 49%,rgba(67,28,121,.16),transparent 45%);pointer-events:none}
+    button,a{-webkit-tap-highlight-color:transparent}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;cursor:pointer}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #e7c3ff;outline-offset:4px}
+    svg{display:block}
+    .wrap{width:min(1180px,calc(100% - 44px));margin:auto}
+    .eyebrow{color:#cc96ff;font-size:.75rem;letter-spacing:.19em;text-transform:uppercase;font-weight:800;display:inline-flex;align-items:center;gap:9px}
+    .eyebrow:before{content:"";width:19px;height:2px;background:currentColor;border-radius:9px}
+    h1,h2,h3,h4,p{margin-top:0}
+    h1,h2,h3,h4,.brand,.value,.number{font-family:"Outfit","DM Sans",sans-serif}
+    p{color:var(--muted)}
+    h2{font-size:clamp(2.05rem,4vw,3.55rem);font-weight:800;line-height:1.1;letter-spacing:-.045em;margin:15px 0 18px}
+    section{padding:86px 0}
+    .btn{border:1px solid transparent;display:inline-flex;gap:11px;align-items:center;justify-content:center;border-radius:14px;font-weight:800;font-size:.94rem;padding:15px 23px;min-height:50px;transition:transform .2s,background .2s,box-shadow .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{color:#fff;background:linear-gradient(105deg,#ad51f8,#7434ef);box-shadow:0 9px 36px rgba(143,64,250,.25)}
+    .btn-primary:hover{box-shadow:0 12px 40px rgba(158,77,250,.42)}
+    .btn-quiet{border-color:var(--border);background:rgba(255,255,255,.045)}
+    .btn-quiet:hover{background:rgba(255,255,255,.085)}
+    .btn-green{background:var(--green);color:#08190c}
+    .btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
+    .card{background:linear-gradient(156deg,rgba(36,27,53,.89),rgba(20,15,31,.93));border:1px solid var(--border);border-radius:var(--radius)}
+    .site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(8,6,17,.83);border-bottom:1px solid rgba(255,255,255,.08)}
+    .header-in{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:inline-flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.04em;font-size:1.55rem;white-space:nowrap}
+    .brand-icon{width:43px;height:43px;border-radius:13px;display:block;box-shadow:0 7px 21px rgba(149,70,255,.21)}
+    .brand b{background:linear-gradient(90deg,#fff 3%,#cf92ff 80%);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .nav{display:flex;gap:29px;align-items:center}
+    .nav a{color:#c4bacc;font-size:.86rem;font-weight:700;white-space:nowrap}
+    .nav a:hover{color:#fff}
+    .header-cta{display:flex;align-items:center;gap:12px}
+    .header-cta .btn{min-height:44px;padding:9px 16px}
+    .menu-toggle{display:none;border:1px solid var(--border);color:#fff;border-radius:10px;background:var(--surface);padding:9px}
+    .menu-toggle svg{height:23px;width:23px}
+    .hero{padding:95px 0 55px;position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:35px}
+    .hero-note{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(189,134,255,.28);background:rgba(163,72,255,.1);border-radius:999px;color:#d7b2ff;padding:8px 13px;font-size:.77rem;font-weight:800;margin-bottom:30px}
+    .hero-note i{width:6px;height:6px;background:#b15aff;box-shadow:0 0 14px #b15aff;border-radius:100%}
+    h1{font-size:clamp(3.4rem,6.15vw,6rem);font-weight:900;letter-spacing:-.065em;line-height:.99;margin-bottom:26px}
+    .gradient{background:linear-gradient(105deg,#f0d9ff,#b95dff 55%,#9062ff);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .hero-copy{font-size:1.09rem;line-height:1.72;max-width:500px;margin-bottom:30px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .micro{color:#a99fb7;font-size:.78rem;display:flex;align-items:center;gap:8px;margin-top:22px}
+    .micro span{color:var(--green)}
+    .visual{min-height:555px;position:relative;display:grid;place-items:center}
+    .visual:before{content:"";position:absolute;inset:8% -6%;border-radius:50%;background:radial-gradient(circle,rgba(119,38,243,.45),rgba(107,37,176,.08) 45%,transparent 69%);filter:blur(11px)}
+    .visual-ring{position:absolute;inset:15% 5%;border:1px solid rgba(181,104,255,.17);border-radius:50%;transform:rotate(-19deg);box-shadow:0 0 100px rgba(144,47,255,.07)}
+    .tv-shell{position:absolute;right:0;top:17%;width:92%;height:59%;padding:10px;background:#140e20;border:1px solid #7b40b7;border-radius:23px;box-shadow:0 35px 90px rgba(0,0,0,.7),0 0 70px rgba(130,47,242,.18);transform:perspective(900px) rotateY(-9deg) rotateX(2deg)}
+    .tv-screen{height:100%;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 75% 20%,rgba(167,78,253,.34),transparent 33%),linear-gradient(135deg,#231448,#090b20 65%);position:relative;padding:24px}
+    .tv-screen .tiny-logo{font-family:Outfit;font-weight:900;font-size:1.23rem}
+    .tv-screen .tiny-logo span{color:#c37eff}
+    .tv-screen .screen-bar{display:flex;gap:10px;opacity:.65;margin-top:8px;font-size:.52rem}
+    .hero-tiles{display:flex;gap:9px;position:absolute;bottom:20px;left:24px;right:24px;height:25%}
+    .hero-tiles span{flex:1;min-width:0;border-radius:9px;background:linear-gradient(30deg,#382071,#b86fff);border:1px solid rgba(225,190,255,.2)}
+    .hero-tiles span:nth-child(2){background:linear-gradient(35deg,#162c59,#ab63b7)}
+    .hero-tiles span:nth-child(3){background:linear-gradient(35deg,#441a55,#d04b70)}
+    .hero-tiles span:nth-child(4){background:linear-gradient(35deg,#163e56,#6b82fa)}
+    .hero-tiles span:nth-child(5){background:linear-gradient(35deg,#2a173b,#9874dc)}
+    .luxite{position:absolute;z-index:2;width:70%;height:auto;left:-5%;bottom:0;filter:drop-shadow(0 18px 30px rgba(7,2,20,.7)) drop-shadow(0 0 16px rgba(138,59,245,.25))}
+    .float-label{position:absolute;z-index:3;background:rgba(29,20,46,.95);border:1px solid rgba(200,156,255,.36);box-shadow:0 16px 30px rgba(8,0,27,.4);border-radius:14px;padding:12px 16px;font-family:Outfit;font-weight:750;font-size:.81rem}
+    .float-label.one{top:12%;left:6%;transform:rotate(-6deg)}
+    .float-label.two{bottom:16%;right:0;transform:rotate(5deg)}
+    .stats{padding:23px 0 27px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(24,16,39,.55)}
+    .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .stat{display:flex;align-items:center;gap:14px}
+    .stat+.stat{border-left:1px solid var(--border);padding-left:27px}
+    .stat-icon{color:#d6a7ff;font-size:1.7rem}
+    .number{font-size:1.65rem;font-weight:850;line-height:1.12}
+    .stat-label{font-size:.8rem;color:var(--muted)}
+    .section-intro{max-width:620px;margin:0 auto 38px;text-align:center}
+    .section-intro p{margin-bottom:0}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{padding:30px}
+    .feature-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:16px;color:#e7ccff;font-size:1.5rem;background:linear-gradient(135deg,rgba(156,73,255,.3),rgba(109,32,208,.08));border:1px solid var(--border);margin-bottom:22px}
+    .feature h3{font-size:1.23rem;letter-spacing:-.025em;margin-bottom:8px}
+    .feature p{font-size:.89rem;margin:0}
+    .soft-bg{background:linear-gradient(180deg,rgba(51,30,74,.18),rgba(30,16,46,.14))}
+    .devices-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
+    .devices-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:27px}
+    .device{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.036);border:1px solid var(--border);border-radius:14px;padding:14px 15px;font-size:.88rem;font-weight:750}
+    .device strong{font-size:1.3rem;color:#b877fa}
+    .showcase{min-height:300px;border:1px solid var(--border);border-radius:28px;display:flex;align-items:center;justify-content:center;padding:25px;background:radial-gradient(circle at 60% 25%,rgba(169,71,239,.32),transparent 59%),linear-gradient(140deg,#22132f,#100c20)}
+    .device-art{width:min(100%,430px);display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end}
+    .device-screen{border-radius:15px;border:6px solid #403052;background:linear-gradient(140deg,#191028,#492878 45%,#0a1d36);box-shadow:0 16px 25px rgba(0,0,0,.36);min-height:180px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;transform:rotate(-5deg)}
+    .device-screen.mobile{min-height:225px;width:122px;justify-self:center;transform:rotate(8deg);border-radius:23px;border-width:8px}
+    .device-screen b{font-family:Outfit;font-weight:900;font-size:1rem}
+    .device-screen i{background:linear-gradient(135deg,#c87eff,#6942cf);height:58px;border-radius:8px;display:block}
+    .device-screen.mobile i{height:90px}
+    .partner-heading{text-align:center;margin:60px 0 22px;font-size:1.05rem;font-weight:750}
+    .partners{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .partner{background:#181225;border:1px solid var(--border);border-radius:15px;padding:23px 10px;text-align:center;font-family:Outfit;font-weight:800;font-size:1rem;min-height:82px;display:grid;place-items:center}
+    .partner:nth-child(1){color:#ddd2ff}.partner:nth-child(2){color:#fd797a}.partner:nth-child(3){color:#dcb1ff}.partner:nth-child(4){color:#e5afff}.partner:nth-child(5){color:#f4d6d6}
+    .partners-note{font-size:.76rem;color:var(--muted2);text-align:center;margin:14px auto 0;max-width:650px}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
+    .step{position:relative;padding:26px}
+    .step-no{font-family:Outfit;font-weight:900;color:#bc86ff;font-size:2.7rem;line-height:1;margin-bottom:20px}
+    .step h3{font-size:1.2rem;margin-bottom:10px}
+    .step p{font-size:.89rem;margin:0}
+    .pricing-shell{background:linear-gradient(150deg,rgba(61,29,92,.5),rgba(19,13,31,.62));padding:26px;border-radius:30px;border:1px solid rgba(203,140,255,.2)}
+    .plans-controls{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+    .control{background:#110c1c;border:1px solid var(--border);border-radius:14px;display:flex;align-items:center;gap:12px;padding:7px}
+    .control-label{font-size:.72rem;font-weight:800;color:var(--muted);padding:0 4px 0 12px}
+    .toggle{border:none;background:transparent;color:var(--muted);font-weight:750;font-size:.8rem;border-radius:10px;padding:9px 13px}
+    .toggle[aria-pressed=true]{background:#8035d9;color:#fff}
+    .plans{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .plan{border:1px solid var(--border);border-radius:19px;background:rgba(14,9,24,.8);padding:22px 17px;display:flex;flex-direction:column;min-width:0;position:relative}
+    .plan.featured{border-color:#a656f5;background:linear-gradient(170deg,#29163f,#140b23);box-shadow:0 0 38px rgba(158,74,249,.13)}
+    .popular{font-size:.65rem;color:#e0c1ff;background:rgba(143,60,238,.24);border-radius:99px;padding:5px 9px;display:inline-block;align-self:start;margin-bottom:15px;letter-spacing:.05em;font-weight:800}
+    .plan:not(.featured) .popular{visibility:hidden}
+    .plan h3{font-size:1.2rem;margin:0 0 3px}
+    .plan small{color:var(--muted);font-size:.76rem}
+    .value{font-size:2.15rem;font-weight:900;letter-spacing:-.055em;line-height:1.1;margin:21px 0 3px;white-space:nowrap}
+    .value span{font-size:.87rem;font-weight:600;letter-spacing:0;color:var(--muted)}
+    .monthly{font-size:.76rem;min-height:32px;color:#caa7fa}
+    .plan ul{padding:16px 0 0;list-style:none;border-top:1px solid var(--border);margin:12px 0 23px;flex:1}
+    .plan li{color:#cec3da;font-size:.76rem;margin-bottom:11px;line-height:1.45}
+    .plan li:before{content:"✓";color:#bd89ff;font-weight:900;margin-right:7px}
+    .plan .btn{padding:11px 9px;font-size:.78rem;border-radius:10px;min-height:44px}
+    .pricing-disclaimer{font-size:.78rem;color:var(--muted2);margin:17px 0 0;text-align:center}
+    .faq{max-width:840px;margin:auto;display:grid;gap:10px}
+    details{background:#191125;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+    summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;padding:19px 22px;font-weight:800}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"+";font-size:1.45rem;color:#bd85ff;line-height:1}
+    details[open] summary:after{content:"−"}
+    details p{font-size:.9rem;margin:0;padding:0 22px 20px}
+    .closing{padding:30px 0 100px}
+    .closing-card{position:relative;overflow:hidden;background:radial-gradient(circle at 90% 30%,rgba(179,82,255,.38),transparent 45%),linear-gradient(120deg,#33204c,#140c24 72%);padding:60px;border:1px solid #6739a1;border-radius:30px;text-align:center}
+    .closing-card h2{font-size:clamp(2.3rem,4.5vw,4rem);max-width:720px;margin:14px auto}
+    .closing-card p{max-width:550px;margin:0 auto 27px}
+    footer{background:#070510;border-top:1px solid var(--border);padding:42px 0 25px}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+    .footer-grid p,.footer-grid a{font-size:.84rem}
+    .footer-grid a{color:#c5b8d4}
+    .footer-grid a:hover{color:#fff}
+    footer h4{font-size:.83rem;text-transform:uppercase;letter-spacing:.07em;margin:7px 0 17px}
+    footer ul{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+    .footer-bottom{border-top:1px solid var(--border);margin-top:37px;padding-top:24px;font-size:.75rem;color:var(--muted2);display:flex;gap:15px;justify-content:space-between;flex-wrap:wrap}
+    .wa-float{position:fixed;right:22px;bottom:21px;z-index:49;display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(255,255,255,.2);background:#24cb68;color:#071b0e;padding:14px 17px;border-radius:999px;font-size:.83rem;font-weight:850;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+    .wa-float:hover{transform:translateY(-2px)}
+    .wa-float svg{height:21px;width:21px}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:1050px){.nav{gap:14px}.nav a{font-size:.78rem}.plans{grid-template-columns:repeat(3,1fr)}.plan{padding:19px}.stat-grid{gap:14px}.stat+.stat{padding-left:15px}}
+    @media(max-width:780px){section{padding:65px 0}.wrap{width:min(100% - 32px,1180px)}.header-in{min-height:68px}.brand{font-size:1.3rem}.brand-icon{height:36px;width:36px}.nav{position:absolute;top:68px;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;background:#100a1e;border-bottom:1px solid var(--border);padding:13px 22px}.nav.open{display:flex}.nav a{padding:13px;font-size:.92rem}.menu-toggle{display:block}.header-cta>.btn{display:none}.hero{padding:58px 0 40px}.hero-grid{grid-template-columns:1fr;gap:5px}.hero-copy{max-width:600px}.visual{min-height:440px;max-width:540px;width:100%;margin:auto}.stats{padding:25px 0}.stat-grid{grid-template-columns:repeat(2,1fr);gap:23px}.stat:nth-child(odd){border-left:0;padding-left:0}.stat+.stat{border:0}.features,.steps{grid-template-columns:1fr 1fr}.devices-grid{grid-template-columns:1fr;gap:26px}.partners{grid-template-columns:repeat(3,1fr)}.footer-grid{grid-template-columns:1.5fr 1fr}.footer-grid>div:last-child{grid-column:span 2}.closing-card{padding:45px 25px}}
+    @media(max-width:520px){.hero-note{font-size:.7rem}.hero h1{font-size:clamp(3rem,14vw,4.25rem)}.hero-copy{font-size:1rem}.hero-actions .btn{width:100%}.micro{justify-content:center;text-align:center}.visual{min-height:350px}.float-label{font-size:.65rem;padding:10px}.float-label.one{top:10%;left:0}.tv-shell{top:17%;height:60%}.luxite{width:75%}.number{font-size:1.45rem}.stats .stat{gap:10px}.features,.steps,.plans{grid-template-columns:1fr}.feature{padding:24px}.partner{font-size:.82rem;padding:15px 5px;min-height:66px}.partners{gap:8px}.plans-controls{display:grid;justify-content:stretch}.control{justify-content:space-between}.control-label{font-size:.68rem}.plans{gap:12px}.plan{padding:20px}.plan ul{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px}.plan li{margin-bottom:0}.plan .btn{width:100%}.footer-grid{grid-template-columns:1fr;gap:24px}.footer-grid>div:last-child{grid-column:auto}.wa-float span{display:none}.wa-float{border-radius:50%;padding:13px}.closing-card{padding:35px 18px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
 </head>
 <body>
-
-    <div class="bg-glow"></div>
-
-    <header>
-        <div class="container nav-container">
-            <!-- Logotipo com lux.svg à esquerda -->
-            <a href="#" class="logo">
-                <img src="lux.svg" alt="LUX Play Logo">
-                <div class="logo-text">LUX <span>PLAY</span></div>
-            </a>
-
-            <!-- Menu e Ações juntos à direita -->
-            <div class="header-right">
-                <ul class="nav-menu">
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#beneficios">Benefícios</a></li>
-                    <li><a href="#passos">Como Funciona</a></li>
-                    <li><a href="#planos">Planos</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-
-                <div class="header-actions">
-                    <button id="openTutorialBtn" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">💻 App para PC</button>
-                    <a href="https://wa.me/5511980024737?text=Oi,%20quero%20meu%20teste%20grátis%20de%206%20horas!" target="_blank" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem;">Pedir Teste</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section id="inicio" class="hero">
-        <div class="container">
-            <span class="badge">🔥 App Exclusivo para Windows Lançado</span>
-            <h1>Sinta a diferença de um <br><span>sinal que não trava.</span></h1>
-            <p>A melhor central de streaming do Brasil. Filmes, séries e esportes ao vivo com estabilidade real. Teste por 6 horas sem compromisso e sem cartão de crédito.</p>
-            
-            <a href="https://wa.me/5511980024737?text=Oi,%20quero%20meu%20teste%20grátis%20de%206%20horas!" target="_blank" class="btn btn-wpp" style="padding: 18px 36px; font-size: 1.1rem;">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                Pedir Teste de 6 Horas
-            </a>
-
-            <!-- Números Oficiais do Sistema -->
-            <div class="content-stats">
-                <div class="stat-badge">📺 Mais de <span>2 Mil</span> Canais</div>
-                <div class="stat-badge">🎬 Mais de <span>28 Mil</span> Filmes</div>
-                <div class="stat-badge">🍿 Quase <span>7 Mil</span> Séries</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Por que escolher o LUX Play (Benefícios com Ícones) -->
-    <section id="beneficios" class="sec-alt">
-        <div class="container">
-            <div class="section-title">
-                <h2>Por que escolher o LUX Play</h2>
-                <p>Reunimos em um único serviço os pontos que mais pesam na experiência de quem assiste todos os dias: estabilidade, qualidade de imagem, facilidade e suporte de verdade.</p>
-            </div>
-            
-            <div class="grid-3">
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-                    <h3>Estabilidade em primeiro lugar</h3>
-                    <p>Infraestrutura distribuída e balanceamento de carga para manter a transmissão firme nos horários de pico, quando todo mundo liga a TV ao mesmo tempo.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
-                    <h3>HD, Full HD e 4K</h3>
-                    <p>Cada conteúdo é entregue na melhor definição possível para a sua conexão com áudio de alta qualidade e nitidez impressionante.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-                    <h3>Instalação simples, sem técnico</h3>
-                    <p>Nada de antena ou cabo passado na parede. A configuração é feita pelo próprio aparelho, com suporte guiado pelo WhatsApp.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-                    <h3>Catálogo atualizado de verdade</h3>
-                    <p>Filmes, temporadas novas e categorias recebem manutenção constante para você sempre ter estreias fresquinhas.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-                    <h3>Suporte que responde</h3>
-                    <p>Atendimento humano, em português, todos os dias. Dúvidas de instalação ou ajustes resolvidos rapidamente sem robôs.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-                    <h3>Compatibilidade ampla</h3>
-                    <p>Disponível para Smart TV, TV Box, Fire TV Stick, celulares, tablets, notebooks e computadores Windows.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Como Funciona em 4 passos -->
-    <section id="passos">
-        <div class="container">
-            <div class="section-title">
-                <h2>Do primeiro contato à primeira sessão em 4 passos</h2>
-                <p>Processo ágil e descomplicado realizado inteiramente pelo WhatsApp em menos de dez minutos.</p>
-            </div>
-            
-            <div class="grid-4">
-                <div class="card">
-                    <div class="step-num">01</div>
-                    <h3>Solicite o teste grátis</h3>
-                    <p>Clique em qualquer botão do site e informe qual aparelho você vai utilizar para assistir.</p>
-                </div>
-                <div class="card">
-                    <div class="step-num">02</div>
-                    <h3>Receba o acesso</h3>
-                    <p>Nossa equipe indica o player ideal para o seu dispositivo e envia os dados de login instantaneamente.</p>
-                </div>
-                <div class="card">
-                    <div class="step-num">03</div>
-                    <h3>Instale em minutos</h3>
-                    <p>Configuração guiada passo a passo para garantir estabilidade e fluidez máxima na sua tela.</p>
-                </div>
-                <div class="card">
-                    <div class="step-num">04</div>
-                    <h3>Assista e decida</h3>
-                    <p>Curta todo o catálogo por 6 horas. Gostando da qualidade, escolha seu plano e continue de onde parou.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Diferenciais -->
-    <section class="sec-alt">
-        <div class="container">
-            <div class="section-title">
-                <h2>O que nos coloca à frente</h2>
-                <p>A verdadeira estabilidade aparece na rotina: no jogo de domingo, na estreia de sexta e na hora que você mais precisa.</p>
-            </div>
-            
-            <div class="grid-3">
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-                    <h3>Foco em excelência</h3>
-                    <p>Nossa operação existe para entregar uma experiência de streaming altamente estável e bem suportada.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-                    <h3>Monitoramento 24h</h3>
-                    <p>Servidores acompanhados em tempo real, com reforço de banda nos horários de pico e grandes eventos esportivos.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                    <h3>Atendimento humano</h3>
-                    <p>Pessoas reais que conhecem a plataforma e ajudam a configurar o aplicativo perfeito para o seu aparelho.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Conteúdo Separado por Categoria -->
-    <section>
-        <div class="container">
-            <div class="section-title">
-                <h2>Tudo separado por categoria</h2>
-                <p>Navegação organizada para você encontrar o que procura em poucos cliques, sem listas poluídas.</p>
-            </div>
-            
-            <div class="grid-3">
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
-                    <h3>Canais ao vivo</h3>
-                    <p>Programação aberta e fechada completa, com troca ágil e grade de horários compatível.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-                    <h3>Filmes sob demanda</h3>
-                    <p>Acervo gigante separado por gênero, ano e coleções com as principais bilheterias mundiais.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M4 11h16"/></svg></div>
-                    <h3>Séries e temporadas</h3>
-                    <p>Episódios atualizados semanalmente com salvamento automático de onde você parou.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Planos Dinâmicos (Grade 2x2) -->
-    <section id="planos" class="sec-alt">
-        <div class="container">
-            <div class="section-title">
-                <h2>Preços Claros e Imbatíveis</h2>
-                <p>Sem multas, sem fidelidade. Escolha o catálogo que combina com você.</p>
-            </div>
-
-            <!-- Seletor -->
-            <div class="plan-toggle">
-                <button id="toggleFamiliar" class="toggle-btn active">Família (Sem Adulto)</button>
-                <button id="toggleVip" class="toggle-btn">VIP (+18)</button>
-            </div>
-
-            <!-- Grade Familiar -->
-            <div id="gridFamiliar" class="plans-grid active">
-                <div class="price-card">
-                    <div class="duration">1 Mês</div>
-                    <div class="price">R$ 25</div>
-                    <div class="discount"></div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20Familiar%20de%201%20Mês" target="_blank" class="btn btn-outline">Assinar Plano</a>
-                </div>
-                <div class="price-card">
-                    <div class="duration">3 Meses</div>
-                    <div class="price">R$ 70</div>
-                    <div class="discount">Economize 6%</div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20Familiar%20de%203%20Meses" target="_blank" class="btn btn-outline">Assinar Plano</a>
-                </div>
-                <div class="price-card popular">
-                    <div class="pop-badge">🔥 MAIS POPULAR</div>
-                    <div class="duration">6 Meses</div>
-                    <div class="price">R$ 130</div>
-                    <div class="discount">Economize 13%</div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20Familiar%20de%206%20Meses" target="_blank" class="btn btn-primary">Assinar Plano</a>
-                </div>
-                <div class="price-card">
-                    <div class="duration">12 Meses</div>
-                    <div class="price">R$ 250</div>
-                    <div class="discount">Economize 16%</div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20Familiar%20Anual" target="_blank" class="btn btn-outline">Assinar Plano</a>
-                </div>
-            </div>
-
-            <!-- Grade VIP (+18) -->
-            <div id="gridVip" class="plans-grid">
-                <div class="price-card">
-                    <div class="duration">1 Mês</div>
-                    <div class="price">R$ 30</div>
-                    <div class="discount"></div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20VIP%20de%201%20Mês" target="_blank" class="btn btn-outline">Assinar Plano</a>
-                </div>
-                <div class="price-card popular">
-                    <div class="pop-badge">🔥 MAIS POPULAR</div>
-                    <div class="duration">3 Meses</div>
-                    <div class="price">R$ 85</div>
-                    <div class="discount">Economize 5%</div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20VIP%20de%203%20Meses" target="_blank" class="btn btn-primary">Assinar Plano</a>
-                </div>
-                <div class="price-card">
-                    <div class="duration">6 Meses</div>
-                    <div class="price">R$ 160</div>
-                    <div class="discount">Economize 11%</div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20VIP%20de%206%20Meses" target="_blank" class="btn btn-outline">Assinar Plano</a>
-                </div>
-                <div class="price-card">
-                    <div class="duration">12 Meses</div>
-                    <div class="price">R$ 300</div>
-                    <div class="discount">Economize 16%</div>
-                    <a href="https://wa.me/5511980024737?text=Quero%20o%20Plano%20VIP%20Anual" target="_blank" class="btn btn-outline">Assinar Plano</a>
-                </div>
-            </div>
-            
-            <p style="text-align: center; color: var(--text-muted); margin-top: 30px; font-size: 0.95rem;">📱💻📺 Todos os planos permitem até 3 dispositivos simultâneos!</p>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq">
-        <div class="container">
-            <div class="section-title">
-                <h2>Perguntas Frequentes</h2>
-                <p>Tire suas dúvidas rapidamente sobre o funcionamento e ativação do LUX Play.</p>
-            </div>
-
-            <div class="faq-container">
-                <div class="faq-item">
-                    <details>
-                        <summary>Como funciona o teste grátis de 6 horas?</summary>
-                        <div class="faq-content">Basta clicar em qualquer botão do WhatsApp no site e nos informar qual aparelho você deseja utilizar. Nossa equipe enviará os dados de acesso imediatamente, sem precisar cadastrar cartão de crédito e sem nenhum compromisso.</div>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details>
-                        <summary>Qual a velocidade de internet recomendada?</summary>
-                        <div class="faq-content">Para canais e filmes em HD, recomendamos pelo menos 15 Mbps de velocidade estável. Para conteúdos em Full HD e 4K, o ideal é contar com uma conexão acima de 25 Mbps.</div>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details>
-                        <summary>Em quais aparelhos o LUX Play funciona?</summary>
-                        <div class="faq-content">Nosso sistema é compatível com Smart TVs, TV Box, Fire TV Stick, celulares Android, iPhone, tablets e computadores Windows através do nosso aplicativo nativo exclusivo.</div>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details>
-                        <summary>Posso assistir em mais de uma tela ao mesmo tempo?</summary>
-                        <div class="faq-content">Sim! Todos os nossos planos permitem o uso de até 3 dispositivos simultâneos para que toda a família aproveite sem brigas pelo controle.</div>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details>
-                        <summary>Existe fidelidade ou multa por cancelamento?</summary>
-                        <div class="faq-content">Zero fidelidade e zero multa. Você utiliza pelo período contratado e só renova se realmente estiver satisfeito com a estabilidade e qualidade do serviço.</div>
-                    </details>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rodapé Profissional -->
-    <footer class="footer-pro">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo" style="margin-bottom: 16px;">
-                        <img src="lux.svg" alt="LUX Play Logo" style="width: 28px; height: 28px; border-radius: 8px; object-fit: cover;">
-                        <div class="logo-text" style="font-size: 1.1rem;">LUX <span>PLAY</span></div>
-                    </div>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; max-width: 320px;">
-                        Tecnologia de streaming com foco em estabilidade máxima, imagem em alta definição e suporte humanizado de verdade.
-                    </p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navegação</h4>
-                    <ul>
-                        <li><a href="#inicio">Início</a></li>
-                        <li><a href="#beneficios">Benefícios</a></li>
-                        <li><a href="#planos">Nossos Planos</a></li>
-                        <li><a href="https://wa.me/5511980024737" target="_blank">Pedir Teste Grátis</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Ajuda</h4>
-                    <ul>
-                        <li><a href="#faq">Perguntas Frequentes</a></li>
-                        <li><a href="https://wa.me/5511980024737" target="_blank">Suporte no WhatsApp</a></li>
-                        <li><a href="https://www.instagram.com/player.lux/" target="_blank">Instagram Oficial</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 LUX Play &middot; Todos os direitos reservados.</p>
-                <p>Plataforma otimizada para alta performance.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal de Instalação com o link do GitHub -->
-    <div id="tutorialModal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="closeTutorialBtn" class="close-modal">&times;</button>
-            <h2 style="margin-bottom: 20px; font-weight: 800;">Como instalar no PC 💻</h2>
-            <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem;">Nosso aplicativo para Windows foi criado para te dar a melhor experiência de cinema sem depender de navegadores.</p>
-            
-            <ul class="tutorial-steps">
-                <li>
-                    <div class="step-num">1</div>
-                    <div>Clique no botão roxo abaixo para baixar o instalador oficial direto do GitHub.</div>
-                </li>
-                <li>
-                    <div class="step-num">2</div>
-                    <div>Dê um duplo clique no arquivo baixado e avance a instalação.</div>
-                </li>
-                <li>
-                    <div class="step-num">3</div>
-                    <div>Pronto! O atalho estará na sua Área de Trabalho. Abra, coloque seu acesso e aproveite.</div>
-                </li>
-            </ul>
-
-            <a href="https://github.com/DevSouza208/lux-play/releases/download/v1.3.1/Lux-Play-Setup-1.3.1.exe" class="btn btn-primary" style="width: 100%;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Baixar Aplicativo Agora
-            </a>
-        </div>
+  <header class="site-header">
+    <div class="wrap header-in">
+      <a class="brand" href="#inicio" aria-label="Lux Play, início"><img class="brand-icon" src="lux.svg" alt=""><b>LUX PLAY</b></a>
+      <nav class="nav" id="site-nav" aria-label="Navegação principal">
+        <a href="#beneficios">Por que Lux?</a><a href="#dispositivos">Dispositivos</a><a href="#como-funciona">Como funciona</a><a href="#planos">Planos</a><a href="#perguntas">Dúvidas</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-primary" data-whatsapp="teste" target="_blank" rel="noopener noreferrer" href="https://wa.me/5511980024737">Teste grátis ↗</a>
+        <button class="menu-toggle" id="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
     </div>
-
-    <!-- WPP Flutuante -->
-    <a href="https://wa.me/5511980024737?text=Oi,%20quero%20meu%20teste%20grátis%20de%206%20horas!" target="_blank" class="wpp-float" aria-label="WhatsApp">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
-
-    <!-- Scripts -->
-    <script>
-        const openBtn = document.getElementById('openTutorialBtn');
-        const closeBtn = document.getElementById('closeTutorialBtn');
-        const modal = document.getElementById('tutorialModal');
-
-        openBtn.addEventListener('click', () => modal.classList.add('active'));
-        closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.remove('active');
-        });
-
-        const btnFamiliar = document.getElementById('toggleFamiliar');
-        const btnVip = document.getElementById('toggleVip');
-        const gridFamiliar = document.getElementById('gridFamiliar');
-        const gridVip = document.getElementById('gridVip');
-
-        btnFamiliar.addEventListener('click', () => {
-            btnFamiliar.classList.add('active');
-            btnVip.classList.remove('active');
-            gridFamiliar.classList.add('active');
-            gridVip.classList.remove('active');
-        });
-
-        btnVip.addEventListener('click', () => {
-            btnVip.classList.add('active');
-            btnFamiliar.classList.remove('active');
-            gridVip.classList.add('active');
-            gridFamiliar.classList.remove('active');
-        });
-    </script>
+  </header>
+  <main>
+    <section id="inicio" class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="hero-note"><i aria-hidden="true"></i> UMA NOVA FASE DO LUX PLAY</span>
+          <h1>Tudo o que você ama. <span class="gradient">Em um só lugar.</span></h1>
+          <p class="hero-copy">Filmes para maratonar, séries para acompanhar, TV ao vivo e muito mais. Seu entretenimento, do seu jeito — em uma experiência que só melhora.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" data-whatsapp="teste" target="_blank" rel="noopener noreferrer" href="https://wa.me/5511980024737">▶ Testar grátis por até 6 horas</a>
+            <a class="btn btn-quiet" href="#planos">Conhecer os planos ↓</a>
+          </div>
+          <div class="micro"><span aria-hidden="true">●</span> Sem cartão de crédito para solicitar o teste. Ativação sujeita à disponibilidade.</div>
+        </div>
+        <div class="visual" aria-label="Ilustração do mascote Luxite apresentando a Lux Play na TV" role="img">
+          <div class="visual-ring" aria-hidden="true"></div>
+          <div class="tv-shell" aria-hidden="true"><div class="tv-screen"><div class="tiny-logo">LUX <span>PLAY</span></div><div class="screen-bar"><span>Início</span><span>Filmes</span><span>Séries</span><span>TV</span></div><div class="hero-tiles"><span></span><span></span><span></span><span></span><span></span></div></div></div>
+          <svg class="luxite" viewBox="0 0 410 470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5cfff"/><stop offset=".31" stop-color="#a55bec"/><stop offset=".72" stop-color="#432270"/><stop offset="1" stop-color="#c18eff"/></linearGradient><linearGradient id="suit" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#472866"/><stop offset=".62" stop-color="#150c26"/><stop offset="1" stop-color="#5a2781"/></linearGradient><radialGradient id="visor"><stop stop-color="#190a32"/><stop offset=".85" stop-color="#080611"/><stop offset="1" stop-color="#351056"/></radialGradient><filter id="shine"><feGaussianBlur stdDeviation="5"/></filter></defs>
+            <path d="M312 263c86-35 98 63 39 95" stroke="#873af0" stroke-width="16" stroke-linecap="round" fill="none"/>
+            <path d="M160 347l-24 62 4 27 80 6 10-82zM235 351l23 60-8 31 82-1 7-24-37-78z" fill="url(#suit)" stroke="#9864cc" stroke-width="9"/>
+            <path d="M129 418c-35 23-29 46 0 47h82c18-10 7-38-17-44zM263 424c-30 18-19 42 3 42h85c31-5 16-35-22-45z" fill="url(#metal)" stroke="#d29dff" stroke-width="5"/>
+            <rect x="144" y="242" width="163" height="145" rx="62" fill="url(#suit)" stroke="#a766f4" stroke-width="9"/>
+            <path d="M151 276c-45-27-73 10-96 28" stroke="url(#metal)" stroke-width="38" stroke-linecap="round"/>
+            <path d="M306 276c35-18 54 3 70 20" stroke="url(#metal)" stroke-width="37" stroke-linecap="round"/>
+            <circle cx="49" cy="316" r="28" fill="url(#suit)" stroke="#c27aff" stroke-width="7"/>
+            <circle cx="378" cy="303" r="27" fill="url(#suit)" stroke="#c27aff" stroke-width="7"/>
+            <path d="M34 306l-3-24m19 19v-28m17 36 16-17" stroke="#c37dff" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="224" cy="314" r="32" fill="#822df4" opacity=".45" filter="url(#shine)"/><circle cx="224" cy="314" r="28" fill="none" stroke="#e6b7ff" stroke-width="5"/><path d="M196 314h56M224 286c-15 14-15 42 0 56M224 286c15 14 15 42 0 56M199 300h49M199 329h49" stroke="#dfbcff" stroke-width="3" fill="none"/>
+            <path d="M99 135c6-91 54-123 124-123 85 0 142 63 130 142" fill="url(#metal)" stroke="#b96eff" stroke-width="11"/>
+            <rect x="65" y="61" width="314" height="204" rx="105" fill="url(#metal)" stroke="#d99dff" stroke-width="8"/>
+            <rect x="86" y="80" width="268" height="170" rx="85" fill="url(#visor)" stroke="#341258" stroke-width="10"/>
+            <path d="M153 154q24-29 39 11q-24 15-39-11M258 166q18-40 43-4q-13 21-43 4" fill="#fbe6ff" stroke="#d56bff" stroke-width="7"/>
+            <path d="M199 207q25 21 50 0" stroke="#ca6aff" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <circle cx="84" cy="170" r="54" fill="url(#metal)" stroke="#7e38d7" stroke-width="10"/><circle cx="361" cy="170" r="54" fill="url(#metal)" stroke="#7e38d7" stroke-width="10"/>
+            <circle cx="84" cy="170" r="34" fill="#6e33b1" stroke="#d5a1ff" stroke-width="6"/><circle cx="361" cy="170" r="34" fill="#6e33b1" stroke="#d5a1ff" stroke-width="6"/>
+          </svg>
+          <div class="float-label one">✨ Um universo de opções</div><div class="float-label two">🍿 Seu momento, seu filme</div>
+        </div>
+      </div>
+    </section>
+    <div class="stats" aria-label="Números aproximados do catálogo">
+      <div class="wrap stat-grid">
+        <div class="stat"><span class="stat-icon" aria-hidden="true">▣</span><div><div class="number">+3.800</div><div class="stat-label">opções de canais</div></div></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true">◩</span><div><div class="number">+38 mil</div><div class="stat-label">filmes</div></div></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true">▤</span><div><div class="number">+13 mil</div><div class="stat-label">séries</div></div></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true">✦</span><div><div class="number">Até 6h</div><div class="stat-label">de teste gratuito</div></div></div>
+      </div>
+    </div>
+    <section id="beneficios">
+      <div class="wrap">
+        <div class="section-intro"><span class="eyebrow">POR QUE LUX PLAY</span><h2>Mais do que assistir.<br><span class="gradient">É aproveitar cada momento.</span></h2><p>Uma experiência pensada para tornar a escolha do que assistir tão boa quanto a sessão.</p></div>
+        <div class="features">
+          <article class="card feature"><div class="feature-icon">✦</div><h3>Um catálogo de possibilidades</h3><p>De grandes histórias a programação ao vivo. Descubra filmes, séries e canais em um só lugar, com atualizações periódicas.</p></article>
+          <article class="card feature"><div class="feature-icon">▣</div><h3>Qualidade para sua tela</h3><p>Opções em HD, Full HD e até 4K em conteúdos compatíveis. A resolução depende do título, do aplicativo e da conexão.</p></article>
+          <article class="card feature"><div class="feature-icon">♡</div><h3>Atendimento próximo</h3><p>Precisa escolher um aplicativo ou configurar seu acesso? Você pode falar diretamente conosco pelo WhatsApp.</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="dispositivos" class="soft-bg">
+      <div class="wrap">
+        <div class="devices-grid">
+          <div>
+            <span class="eyebrow">LIBERDADE PARA ASSISTIR</span><h2>Seu entretenimento <span class="gradient">acompanha você.</span></h2>
+            <p>Na sala, no quarto ou em qualquer cantinho da casa. Consulte o aplicativo compatível com seu aparelho e receba orientação para configurar seu acesso.</p>
+            <div class="devices-list"><div class="device"><strong>▣</strong> Smart TV</div><div class="device"><strong>▤</strong> Celular</div><div class="device"><strong>▱</strong> Tablet</div><div class="device"><strong>▥</strong> Computador</div><div class="device"><strong>▣</strong> TV Box</div><div class="device"><strong>✦</strong> Outros aparelhos*</div></div>
+            <p style="font-size:.76rem;margin:15px 0 0">*A compatibilidade depende do sistema operacional e do aplicativo utilizado.</p>
+          </div>
+          <div class="showcase" aria-hidden="true"><div class="device-art"><div class="device-screen"><b>LUX <span style="color:#cc96ff">PLAY</span></b><i></i><small>Filmes · Séries · TV</small></div><div class="device-screen mobile"><b style="font-size:.8rem">LUX <span style="color:#cc96ff">PLAY</span></b><i></i><small style="font-size:.55rem">Onde quiser</small></div></div></div>
+        </div>
+        <h3 class="partner-heading">Aplicativos compatíveis e opções para configuração</h3>
+        <div class="partners" aria-label="Aplicativos mencionados pelos nossos clientes"><div class="partner">Smarters<br>Player Lite</div><div class="partner">ONE<span style="font-size:1.4rem">X</span></div><div class="partner">RX Purple</div><div class="partner">Lótus</div><div class="partner">Vuser</div></div>
+        <p class="partners-note">Aplicativos desenvolvidos por terceiros. Disponibilidade, licenças e recursos variam por dispositivo. As marcas pertencem aos respectivos titulares.</p>
+      </div>
+    </section>
+    <section id="como-funciona">
+      <div class="wrap">
+        <div class="section-intro"><span class="eyebrow">SIMPLES ASSIM</span><h2>Você pede. A gente orienta. <span class="gradient">Você aproveita.</span></h2><p>Três passos para conhecer a experiência Lux Play.</p></div>
+        <div class="steps">
+          <div class="card step"><div class="step-no">01</div><h3>Chame no WhatsApp</h3><p>Conte em qual aparelho deseja assistir e tire suas dúvidas com nosso atendimento.</p></div>
+          <div class="card step"><div class="step-no">02</div><h3>Solicite seu teste</h3><p>Conheça o serviço com um período gratuito de até 6 horas, sujeito à disponibilidade de ativação.</p></div>
+          <div class="card step"><div class="step-no">03</div><h3>Escolha seu plano</h3><p>Se gostar da experiência, escolha o período e a quantidade de telas que melhor combinam com você.</p></div>
+        </div>
+      </div>
+    </section>
+    <section id="planos" class="soft-bg">
+      <div class="wrap">
+        <div class="section-intro"><span class="eyebrow">PLANOS LUX PLAY</span><h2>Mais entretenimento. <span class="gradient">Um preço que cabe.</span></h2><p>Planos a partir de <strong style="color:#fff">R$ 20</strong>. Compare os períodos e personalize a quantidade de telas.</p></div>
+        <div class="pricing-shell">
+          <div class="plans-controls" role="group" aria-label="Personalize os planos">
+            <div class="control" id="screen-control"><span class="control-label">TELAS</span><button class="toggle" type="button" data-screens="1" aria-pressed="true">1 tela</button><button class="toggle" type="button" data-screens="2" aria-pressed="false">2 telas</button></div>
+            <div class="control" id="adult-control"><span class="control-label">CATÁLOGO</span><button class="toggle" type="button" data-adult="no" aria-pressed="true">Sem adulto</button><button class="toggle" type="button" data-adult="yes" aria-pressed="false">Com adulto</button></div>
+          </div>
+          <div class="plans" id="plans-list" aria-live="polite">
+            <article class="plan"><h3>1 mês</h3><div class="value">R$ 20</div><p>Escolha acima suas preferências.</p></article>
+          </div>
+          <p class="pricing-disclaimer">Valores promocionais sujeitos a alteração. Planos para 2 telas e períodos prolongados dependem de confirmação de disponibilidade. Sem renovação automática pelo site.</p>
+        </div>
+      </div>
+    </section>
+    <section id="perguntas">
+      <div class="wrap">
+        <div class="section-intro"><span class="eyebrow">AINDA TEM DÚVIDAS?</span><h2>A gente <span class="gradient">responde.</span></h2></div>
+        <div class="faq">
+          <details><summary>Como funciona o teste grátis de até 6 horas?</summary><p>Envie uma mensagem pelo WhatsApp e informe seu aparelho. Nossa equipe orientará a ativação, quando houver disponibilidade. Não é necessário cadastrar cartão de crédito para solicitar o teste.</p></details>
+          <details><summary>Posso assistir em mais de um aparelho?</summary><p>Sim, temos opções de 1 e 2 telas. A quantidade de reproduções simultâneas depende do plano contratado. Usar o acesso em diferentes aparelhos não significa necessariamente assistir ao mesmo tempo.</p></details>
+          <details><summary>Preciso instalar um aplicativo?</summary><p>O acesso pode ser configurado em aplicativos compatíveis com seu dispositivo. A disponibilidade e eventuais taxas do aplicativo são de responsabilidade dos respectivos desenvolvedores. Podemos orientar qual opção verificar para seu aparelho.</p></details>
+          <details><summary>Como funciona o pagamento e a renovação?</summary><p>Os planos são vendidos por período. Consulte formas de pagamento, prazo de ativação e condições de renovação diretamente com o atendimento antes de contratar.</p></details>
+          <details><summary>Tem aplicativo para Windows?</summary><p>Existe uma versão para Windows. <a style="color:#d6a6ff;text-decoration:underline" target="_blank" rel="noopener noreferrer" href="https://github.com/DevSouza208/lux-play/releases/download/v1.5.0/Lux.Play-Setup-1.5.0.exe">Baixar o instalador v1.5.0</a>. Verifique os requisitos e a compatibilidade com seu serviço antes de instalar.</p></details>
+          <details><summary>Todo conteúdo está disponível em 4K?</summary><p>Não. Qualidade, disponibilidade e reprodução variam conforme o conteúdo, os dispositivos, o aplicativo e a velocidade/estabilidade da internet.</p></details>
+        </div>
+      </div>
+    </section>
+    <section class="closing" id="contato">
+      <div class="wrap">
+        <div class="closing-card"><span class="eyebrow">SEU PRÓXIMO PLAY COMEÇA AQUI</span><h2>Pronto para descobrir seu novo favorito?</h2><p>Converse com a gente, tire suas dúvidas e solicite um teste grátis de até 6 horas.</p><a class="btn btn-green" data-whatsapp="teste" href="https://wa.me/5511980024737" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp ↗</a></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><a class="brand" href="#inicio"><img class="brand-icon" src="lux.svg" alt=""><b>LUX PLAY</b></a><p style="max-width:330px;margin-top:16px">Filmes, séries e TV em uma experiência feita para seu tempo livre. Catálogo e compatibilidade sujeitos a mudanças.</p></div>
+        <div><h4>Explore</h4><ul><li><a href="#beneficios">Benefícios</a></li><li><a href="#dispositivos">Dispositivos</a></li><li><a href="#planos">Preços e planos</a></li><li><a href="#perguntas">Perguntas frequentes</a></li></ul></div>
+        <div><h4>Atendimento</h4><ul><li><a href="https://wa.me/5511980024737" data-whatsapp="suporte" target="_blank" rel="noopener noreferrer">WhatsApp: (11) 98002-4737</a></li><li><a href="https://www.instagram.com/player.lux/" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="#privacidade">Privacidade</a></li></ul></div>
+      </div>
+      <div id="privacidade" style="border-top:1px solid var(--border);padding-top:23px;margin-top:24px">
+        <details><summary style="font-size:.79rem;padding:8px 0">Informações sobre privacidade e uso</summary><p>Este site apresenta ofertas e encaminha solicitações de atendimento ao WhatsApp. Não há cadastro, pagamento ou armazenamento de dados pessoais diretamente nesta página. Mensagens enviadas ao atendimento seguem as políticas do WhatsApp. Aplicativos de terceiros possuem seus próprios termos, políticas e condições de uso. Antes da contratação, confirme condições, catálogo, dispositivos e suporte com a equipe.</p></details>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Lux Play · Seu entretenimento, do seu jeito.</span><span>Valores e catálogo sujeitos a alterações.</span></div>
+    </div>
+  </footer>
+  <a class="wa-float" data-whatsapp="teste" href="https://wa.me/5511980024737" target="_blank" rel="noopener noreferrer" aria-label="Solicitar teste grátis pelo WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20.5 3.5A11.85 11.85 0 0 0 12.05 0C5.49 0 .15 5.35.15 11.91a11.8 11.8 0 0 0 1.58 5.92L0 24l6.3-1.65A11.93 11.93 0 0 0 12.04 23.8c6.56 0 11.9-5.35 11.9-11.9 0-3.18-1.24-6.17-3.44-8.4ZM12.05 21.8a9.9 9.9 0 0 1-5.04-1.38l-.36-.22-3.74.99 1-3.65-.24-.38a9.9 9.9 0 0 1 8.39-15.15 9.91 9.91 0 0 1-.01 19.79Zm5.43-7.4c-.3-.15-1.76-.87-2.03-.96-.27-.1-.47-.15-.67.15-.2.3-.76.96-.94 1.16-.17.2-.34.22-.64.08-.3-.15-1.25-.46-2.39-1.48-.88-.78-1.48-1.76-1.65-2.06-.17-.29-.02-.46.13-.61.13-.13.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.69.63.72.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42s.25-1.29.17-1.41c-.07-.12-.27-.2-.57-.35Z"/></svg>
+    <span>Teste grátis</span>
+  </a>
+  <script>
+    (function(){
+      "use strict";
+      var waBase="https://wa.me/5511980024737?text=";
+      function setWhatsApp(selector,message){document.querySelectorAll(selector).forEach(function(el){el.href=waBase+encodeURIComponent(message);});}
+      setWhatsApp('[data-whatsapp="teste"]',"Olá! Conheci o site da Lux Play e gostaria de solicitar um teste gratuito de até 6 horas. Pode me ajudar?");
+      setWhatsApp('[data-whatsapp="suporte"]',"Olá! Preciso de ajuda com a Lux Play.");
+      var mobile=document.getElementById("menu-toggle"),nav=document.getElementById("site-nav");
+      mobile.addEventListener("click",function(){var open=mobile.getAttribute("aria-expanded")!=="true";mobile.setAttribute("aria-expanded",String(open));mobile.setAttribute("aria-label",open?"Fechar menu":"Abrir menu");nav.classList.toggle("open",open);});
+      nav.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){mobile.setAttribute("aria-expanded","false");nav.classList.remove("open");});});
+      var prices=[
+        {months:1, label:"1 mês",p:[20,30,25,35]},
+        {months:2, label:"2 meses",p:[40,60,50,70]},
+        {months:3, label:"3 meses",p:[55,85,70,100]},
+        {months:6, label:"6 meses",p:[100,155,130,180]},
+        {months:12,label:"12 meses",p:[190,290,240,340]}
+      ];
+      var screens=1,adult=false,formatMoney=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:2});
+      function render(){
+        var index=(screens===2?2:0)+(adult?1:0);
+        var base=prices[0].p[index];
+        document.getElementById("plans-list").innerHTML=prices.map(function(item){
+          var total=item.p[index],month=total/item.months,saving=base*item.months-total;
+          var msg="Olá! Gostaria de contratar o plano Lux Play: "+item.label+", "+screens+" "+(screens===1?"tela":"telas")+", "+(adult?"com":"sem")+" conteúdo adulto, por "+formatMoney.format(total)+". Pode confirmar a disponibilidade?";
+          return '<article class="plan '+(item.months===3?'featured':'')+'"><span class="popular">'+(item.months===3?'MELHOR ESCOLHA':'PLANO LUX')+'</span><h3>'+item.label+'</h3><small>'+screens+' '+(screens===1?'tela':'telas')+' · '+(adult?'Com':'Sem')+' adulto</small><div class="value"><span>R$</span> '+total+'</div><div class="monthly">'+formatMoney.format(month)+'/mês'+(saving>0?' · economize '+formatMoney.format(saving):'')+'</div><ul><li>Atendimento por WhatsApp</li><li>Período pré-pago</li><li>Catálogo variado</li></ul><a class="btn '+(item.months===3?'btn-primary':'btn-quiet')+'" target="_blank" rel="noopener noreferrer" href="'+waBase+encodeURIComponent(msg)+'">Escolher plano ↗</a></article>';
+        }).join("");
+        document.querySelectorAll("[data-screens]").forEach(function(btn){btn.setAttribute("aria-pressed",String(Number(btn.getAttribute("data-screens"))===screens));});
+        document.querySelectorAll("[data-adult]").forEach(function(btn){btn.setAttribute("aria-pressed",String((btn.getAttribute("data-adult")==="yes")===adult));});
+      }
+      document.querySelectorAll("[data-screens]").forEach(function(btn){btn.addEventListener("click",function(){screens=Number(btn.getAttribute("data-screens"));render();});});
+      document.querySelectorAll("[data-adult]").forEach(function(btn){btn.addEventListener("click",function(){adult=btn.getAttribute("data-adult")==="yes";render();});});
+      render();
+    })();
+  </script>
 </body>
 </html>

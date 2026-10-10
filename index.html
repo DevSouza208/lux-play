@@ -362,11 +362,11 @@
     }
     .partner-gallery-grid .app-logo-frame{
       background:#0c0912;border:1px solid rgba(255,255,255,.045);
-      border-radius:12px;height:148px;width:100%;display:grid;place-items:center;
+      border-radius:12px;width:100%;height:auto;aspect-ratio:1 / 1;display:grid;place-items:center;
       overflow:hidden;padding:12px;
     }
     .partner-gallery-grid .app-logo-frame img{
-      display:block;height:100%;width:100%;max-width:180px;max-height:124px;
+      display:block;height:100%;width:100%;max-width:100%;max-height:100%;
       object-fit:contain;object-position:center;
     }
     .partner-gallery-grid .app-meta{
@@ -381,12 +381,7 @@
       font:700 .91rem/1.26 "Outfit",sans-serif;letter-spacing:-.018em;
       white-space:normal;overflow-wrap:break-word;
     }
-    .partner-gallery-grid .app-logo-card:nth-child(1) img{max-height:112px}
-    .partner-gallery-grid .app-logo-card:nth-child(2) img{max-height:112px}
-    .partner-gallery-grid .app-logo-card:nth-child(3) img{max-width:174px}
-    .partner-gallery-grid .app-logo-card:nth-child(4) img{max-width:174px}
-    .partner-gallery-grid .app-logo-card:nth-child(5) img{max-height:112px}
-    .partner-gallery-disclaimer{max-width:810px;margin:19px auto 0}
+        .partner-gallery-disclaimer{max-width:810px;margin:19px auto 0}
     @media(max-width:960px){
       .partner-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
     }
@@ -399,7 +394,7 @@
         scrollbar-width:thin;scrollbar-color:#65417e transparent;
       }
       .partner-gallery-grid .app-logo-card{flex:0 0 min(66vw,240px);scroll-snap-align:start;min-height:211px}
-      .partner-gallery-grid .app-logo-frame{height:142px}
+      .partner-gallery-grid .app-logo-frame{height:auto;aspect-ratio:1 / 1}
       .partner-gallery-grid .app-logo-card:last-child{
         grid-column:auto;width:auto;max-width:none;justify-self:auto;
       }

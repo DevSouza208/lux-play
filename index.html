@@ -298,6 +298,52 @@
       .hero-mascot{width:83%;left:-8%}
     }
 
+  
+    /* Devices editorial: authentic mascots, curated app logos, no generated orbs */
+    .experience-section{position:relative;overflow:hidden;background:linear-gradient(180deg,#100b19 0%,#0b0713 100%);border-top:1px solid rgba(207,154,244,.1);border-bottom:1px solid rgba(207,154,244,.1);padding:100px 0 92px}
+    .experience-section:before{content:"";position:absolute;pointer-events:none;right:-18%;top:-28%;width:70%;height:620px;background:radial-gradient(circle,rgba(107,33,190,.12),transparent 65%)}
+    .experience-grid{display:grid;grid-template-columns:1fr 1.04fr;gap:70px;align-items:center}
+    .experience-copy{position:relative;z-index:3}
+    .experience-copy h2{font:700 clamp(2.55rem,4.15vw,4.15rem)/1.08 "Outfit",sans-serif;letter-spacing:-.045em;margin:19px 0 23px}
+    .experience-copy>p:not(.experience-footnote){font-size:1.045rem;max-width:520px;line-height:1.82;margin:0;color:#c3b5cd}
+    .experience-devices{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0}
+    .experience-devices span{display:inline-flex;align-items:center;gap:8px;padding:11px 13px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(216,179,252,.17);font-size:.82rem;color:#e7ddec;font-weight:700;white-space:nowrap}
+    .experience-devices svg{width:18px;height:18px;color:#c191ff;stroke-width:1.8}
+    .device-advisor{border-color:rgba(179,107,244,.36);font-size:.83rem;padding:13px 15px}
+    .device-advisor svg:first-child{color:#ce9bf4}
+    .experience-footnote{margin:16px 0 0;font-size:.73rem;color:#8f829f}
+    .device-stage{position:relative;min-height:520px;overflow:hidden;isolation:isolate;border-radius:33px;border:1px solid rgba(188,105,246,.32);background:radial-gradient(ellipse at 53% 42%,rgba(133,47,237,.26),transparent 53%),linear-gradient(145deg,#261437 2%,#130c21 50%,#120b1c 100%);box-shadow:inset 0 1px rgba(255,255,255,.07),0 30px 75px rgba(0,0,0,.21)}
+    .device-stage-grid{position:absolute;inset:0;z-index:-1;opacity:.25;background-image:linear-gradient(rgba(210,144,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(210,144,255,.1) 1px,transparent 1px);background-size:65px 65px;mask-image:linear-gradient(90deg,transparent,#000 20%,#000 85%,transparent)}
+    .device-stage-beam{position:absolute;left:6%;right:7%;top:20%;height:85%;border:1px solid rgba(194,116,250,.22);border-radius:50%;transform:rotate(-27deg) scaleX(1.25)}
+    .device-stage:after{content:"";position:absolute;bottom:-190px;left:17%;height:300px;width:480px;background:radial-gradient(ellipse,rgba(180,84,255,.2),transparent 68%);pointer-events:none}
+    .device-stage-label{position:absolute;z-index:4;top:27px;left:27px;display:inline-flex;align-items:center;gap:8px;color:#e3beff;background:rgba(12,8,22,.64);border:1px solid rgba(215,158,255,.28);border-radius:999px;padding:10px 13px;font-size:.67rem;letter-spacing:.17em;font-weight:800}
+    .device-stage-label svg{height:15px;width:15px}
+    .device-stage-side{position:absolute;right:18px;top:22%;writing-mode:vertical-rl;letter-spacing:.21em;font-size:.64rem;font-weight:800;color:#8b73a2}
+    .device-boy{position:absolute;z-index:2;bottom:-38px;left:50%;transform:translateX(-50%);width:min(105%,570px);max-height:95%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 19px 26px rgba(0,0,0,.45));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+    .device-stage:hover .device-boy{transform:translateX(-50%) translateY(-9px)}
+    .device-stage-bottom{position:absolute;z-index:4;left:21px;bottom:21px;background:rgba(14,8,24,.8);backdrop-filter:blur(12px);border:1px solid rgba(205,148,255,.22);display:flex;align-items:center;gap:12px;padding:12px 15px;border-radius:14px;font-size:.75rem;color:#c7b8d4;line-height:1.35}
+    .device-stage-bottom strong{color:#fff;font-size:.9rem}
+    .device-stage-bottom svg{width:30px;height:30px;color:#d7a1ff;stroke-width:1.5}
+    .partner-gallery{margin-top:90px}
+    .partner-gallery-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:28px}
+    .partner-gallery-heading h3{font:700 clamp(1.8rem,3.1vw,2.65rem)/1.15 "Outfit",sans-serif;letter-spacing:-.035em;margin:11px 0 0}
+    .partner-gallery-heading h3 span{color:#c991fa}
+    .partner-gallery-heading p{max-width:430px;margin:0;font-size:.86rem;line-height:1.7}
+    .partner-gallery-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+    .app-logo-card{min-width:0;background:linear-gradient(155deg,rgba(40,27,53,.66),rgba(18,12,29,.92));border:1px solid rgba(216,172,248,.16);border-radius:20px;padding:11px;transition:transform .23s,border-color .23s}
+    .app-logo-card:hover{border-color:rgba(203,143,255,.45);transform:translateY(-4px)}
+    .app-logo-frame{display:grid;place-items:center;border-radius:14px;background:rgba(9,6,16,.75);height:132px;overflow:hidden;padding:12px}
+    .app-logo-frame img{display:block;width:100%;height:100%;object-fit:contain;max-width:190px;color:transparent}
+    .app-meta{display:flex;gap:5px;justify-content:space-between;align-items:center;padding:12px 4px 4px;font-size:.78rem;color:#e6dced}
+    .app-meta strong{font-weight:800}
+    .app-meta svg{height:16px;width:16px;color:#b58ecb;flex-shrink:0}
+    .partner-gallery-disclaimer{margin:18px 0 0;display:flex;justify-content:center;gap:8px;align-items:flex-start;font-size:.73rem;line-height:1.6;color:#9c90aa;text-align:center}
+    .partner-gallery-disclaimer svg{width:15px;height:15px;flex-shrink:0;margin-top:1px}
+    @media(max-width:1050px){.experience-grid{gap:35px}.experience-copy h2{font-size:clamp(2.3rem,4.6vw,3.4rem)}.partner-gallery-grid{gap:10px}.app-logo-frame{height:115px}}
+    @media(max-width:780px){.experience-section{padding:70px 0}.experience-grid{grid-template-columns:1fr;gap:30px}.experience-copy h2{font-size:clamp(2.4rem,7vw,3.8rem)}.experience-copy>p:not(.experience-footnote){max-width:620px}.device-stage{min-height:450px;max-width:620px;width:100%;margin-inline:auto}.device-boy{width:min(94%,500px)}.partner-gallery{margin-top:70px}.partner-gallery-heading{align-items:flex-start;flex-direction:column;gap:8px}.partner-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.app-logo-frame{height:138px}}
+    @media(max-width:520px){.experience-section{padding:62px 0 65px}.experience-copy h2{font-size:clamp(2.3rem,9vw,3.1rem)}.experience-copy>p:not(.experience-footnote){font-size:.98rem}.experience-devices{gap:8px;margin:23px 0}.experience-devices span{padding:9px 10px;font-size:.73rem}.experience-devices svg{width:16px;height:16px}.device-advisor{width:100%;font-size:.78rem;min-height:54px;padding:10px}.device-stage{min-height:362px;border-radius:24px}.device-stage-label{top:15px;left:15px;font-size:.6rem}.device-stage-side{right:9px;top:19%;font-size:.5rem}.device-stage-bottom{left:13px;bottom:13px;font-size:.67rem;padding:8px 11px}.device-stage-bottom strong{font-size:.75rem}.device-boy{width:min(108%,430px);max-height:94%;bottom:-25px}.partner-gallery{margin-top:56px}.partner-gallery-heading h3{font-size:1.85rem}.partner-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.app-logo-frame{height:128px}.app-logo-card{padding:8px;border-radius:15px}.app-meta{font-size:.74rem;padding:10px 3px 3px}.partner-gallery-disclaimer{text-align:left;justify-content:flex-start}.partner-gallery-grid .app-logo-card:last-child{grid-column:span 2;max-width:calc(50% - 5px);width:100%;justify-self:center}}
+    @media(prefers-reduced-motion:reduce){.device-boy,.app-logo-card{transition:none}.device-stage:hover .device-boy{transform:translateX(-50%)}}
+
   </style>
 </head>
 <body>
@@ -363,37 +409,51 @@
         </div>
       </div>
     </section>
-    <section id="dispositivos" class="soft-bg">
+    <section id="dispositivos" class="experience-section">
       <div class="wrap">
-        <div class="devices-grid">
-          <div>
-            <span class="eyebrow">LIBERDADE PARA ASSISTIR</span><h2>Seu entretenimento <span class="gradient">acompanha você.</span></h2>
-            <p>Na sala, no quarto ou em qualquer cantinho da casa. Consulte o aplicativo compatível com seu aparelho e receba orientação para configurar seu acesso.</p>
-            <div class="devices-list">
-  <div class="device"><i data-lucide="tv" aria-hidden="true"></i>Smart TV</div>
-  <div class="device"><i data-lucide="smartphone" aria-hidden="true"></i>Celular</div>
-  <div class="device"><i data-lucide="tablet" aria-hidden="true"></i>Tablet</div>
-  <div class="device"><i data-lucide="laptop" aria-hidden="true"></i>Computador</div>
-  <div class="device"><i data-lucide="monitor-play" aria-hidden="true"></i>TV Box</div>
-  <div class="device"><i data-lucide="gamepad-2" aria-hidden="true"></i>Outros aparelhos*</div>
-</div>
-            <p style="font-size:.76rem;margin:15px 0 0">*A compatibilidade depende do sistema operacional e do aplicativo utilizado.</p>
+        <div class="experience-grid">
+          <div class="experience-copy">
+            <span class="eyebrow">EM QUALQUER TELA</span>
+            <h2>Escolha o lugar.<br><span class="gradient">A gente leva a diversão.</span></h2>
+            <p>Do sofá ao celular: encontre uma forma de assistir que combine com o seu dispositivo. Nossa equipe ajuda você a escolher um aplicativo compatível e configurar seu acesso.</p>
+            <div class="experience-devices" aria-label="Dispositivos compatíveis">
+              <span><i data-lucide="tv" aria-hidden="true"></i> Smart TV</span>
+              <span><i data-lucide="smartphone" aria-hidden="true"></i> Celular</span>
+              <span><i data-lucide="tablet" aria-hidden="true"></i> Tablet</span>
+              <span><i data-lucide="laptop" aria-hidden="true"></i> Computador</span>
+              <span><i data-lucide="monitor-play" aria-hidden="true"></i> TV Box</span>
+            </div>
+            <a href="https://wa.me/5511980024737" data-whatsapp="suporte" target="_blank" rel="noopener noreferrer" class="btn btn-quiet device-advisor">
+              <i data-lucide="message-circle" aria-hidden="true"></i> Qual app funciona no meu aparelho? <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </a>
+            <p class="experience-footnote">* A compatibilidade depende do aparelho, do sistema e do aplicativo escolhido.</p>
           </div>
-          <div class="showcase">
-  <div class="showcase-text"><i data-lucide="play-circle" aria-hidden="true"></i><span>O próximo play é seu.</span></div>
-  <img class="boy-mascot" src="luxy.png" width="620" height="640" alt="Garoto Lux, mascote da Lux Play, apresentando o entretenimento" loading="lazy" decoding="async">
-  <div class="showcase-caption"><span class="status-dot"></span> FILMES · SÉRIES · TV</div>
-</div>
+          <div class="device-stage" aria-label="Garoto Lux estiloso apresentando a experiência da Lux Play">
+            <div class="device-stage-grid" aria-hidden="true"></div>
+            <div class="device-stage-beam" aria-hidden="true"></div>
+            <span class="device-stage-label"><i data-lucide="sparkles" aria-hidden="true"></i> UNIVERSO LUX</span>
+            <span class="device-stage-side" aria-hidden="true">ESCOLHA SUA TELA — DÊ O PLAY</span>
+            <img src="0105_Estiloso.png" class="device-boy" alt="Garoto Lux de moletom preto e fones roxos, com óculos escuros e fazendo sinal de positivo com as mãos" width="512" height="512" loading="lazy" decoding="async">
+            <div class="device-stage-bottom"><i data-lucide="play-circle" aria-hidden="true"></i><span>Seu entretenimento.<br><strong>Sem complicação.</strong></span></div>
+          </div>
         </div>
-        <h3 class="partner-heading"><span>Integrações e compatibilidade</span><strong>Conheça os apps utilizados pelos nossos clientes</strong></h3>
-        <div class="partners" aria-label="Aplicativos compatíveis, desenvolvidos por terceiros">
-  <div class="partner"><span class="partner-mark">S</span><span>Smarters<br><small>Player Lite</small></span></div>
-  <div class="partner"><span class="partner-mark">X</span><span>OneX</span></div>
-  <div class="partner"><span class="partner-mark">RX</span><span>RX Purple</span></div>
-  <div class="partner"><span class="partner-mark">L</span><span>Lótus</span></div>
-  <div class="partner"><span class="partner-mark">V</span><span>Vuser</span></div>
-</div>
-        <p class="partners-note">Aplicativos desenvolvidos por terceiros. Disponibilidade, licenças e recursos variam por dispositivo. As marcas pertencem aos respectivos titulares.</p>
+        <div class="partner-gallery" id="aplicativos">
+          <div class="partner-gallery-heading">
+            <div>
+              <span class="eyebrow">APLICATIVOS COMPATÍVEIS</span>
+              <h3>Você escolhe <span>como assistir.</span></h3>
+            </div>
+            <p>Conheça algumas opções utilizadas com a Lux Play. Podemos ajudar você a identificar a mais adequada para seu dispositivo.</p>
+          </div>
+          <div class="partner-gallery-grid" aria-label="Aplicativos de reprodução compatíveis">
+            <div class="app-logo-card"><div class="app-logo-frame"><img src="images.png" alt="Logotipo do Smarters Player Lite" loading="lazy" decoding="async"></div><div class="app-meta"><strong>Smarters Player Lite</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
+            <div class="app-logo-card"><div class="app-logo-frame"><img src="images.jpg" alt="Logotipo do OneX" loading="lazy" decoding="async"></div><div class="app-meta"><strong>OneX</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
+            <div class="app-logo-card"><div class="app-logo-frame"><img src="logo_500x300.png" alt="Logotipo do RX Purple" loading="lazy" decoding="async"></div><div class="app-meta"><strong>RX Purple</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
+            <div class="app-logo-card"><div class="app-logo-frame"><img src="lotus-logo.webp" alt="Logotipo do Lótus" loading="lazy" decoding="async"></div><div class="app-meta"><strong>Lótus</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
+            <div class="app-logo-card"><div class="app-logo-frame"><img src="unnamed.webp" alt="Logotipo do Vuser" loading="lazy" decoding="async"></div><div class="app-meta"><strong>Vuser</strong><i data-lucide="arrow-up-right" aria-hidden="true"></i></div></div>
+          </div>
+          <p class="partner-gallery-disclaimer"><i data-lucide="info" aria-hidden="true"></i> Esses aplicativos são de terceiros. Disponibilidade, licenças e recursos variam conforme o dispositivo; as marcas pertencem aos respectivos titulares.</p>
+        </div>
       </div>
     </section>
     <section id="como-funciona">

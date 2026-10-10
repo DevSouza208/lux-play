@@ -11,11 +11,11 @@
   <meta property="og:description" content="Mais conteúdo, mais possibilidades. Planos a partir de R$ 20 e teste grátis de até 6 horas.">
   <meta property="og:url" content="https://luxplay.vercel.app/">
   <link rel="canonical" href="https://luxplay.vercel.app/">
-  <link rel="icon" href="/lux.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="/lux.ico">
+  <link rel="icon" href="/lux.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/LUXPLAY.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
   <title>Lux Play | Filmes, séries, TV e muito mais</title>
   <style>
     :root{color-scheme:dark;--bg:#080611;--surface:#151020;--surface2:#21182f;--white:#fcfaff;--muted:#b8aec9;--muted2:#898097;--purple:#a74aff;--purple2:#6b2bea;--border:rgba(209,177,255,.17);--radius:22px;--green:#32d583}
@@ -169,19 +169,106 @@
     @media(max-width:780px){section{padding:65px 0}.wrap{width:min(100% - 32px,1180px)}.header-in{min-height:68px}.brand{font-size:1.3rem}.brand-icon{height:36px;width:36px}.nav{position:absolute;top:68px;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:0;background:#100a1e;border-bottom:1px solid var(--border);padding:13px 22px}.nav.open{display:flex}.nav a{padding:13px;font-size:.92rem}.menu-toggle{display:block}.header-cta>.btn{display:none}.hero{padding:58px 0 40px}.hero-grid{grid-template-columns:1fr;gap:5px}.hero-copy{max-width:600px}.visual{min-height:440px;max-width:540px;width:100%;margin:auto}.stats{padding:25px 0}.stat-grid{grid-template-columns:repeat(2,1fr);gap:23px}.stat:nth-child(odd){border-left:0;padding-left:0}.stat+.stat{border:0}.features,.steps{grid-template-columns:1fr 1fr}.devices-grid{grid-template-columns:1fr;gap:26px}.partners{grid-template-columns:repeat(3,1fr)}.footer-grid{grid-template-columns:1.5fr 1fr}.footer-grid>div:last-child{grid-column:span 2}.closing-card{padding:45px 25px}}
     @media(max-width:520px){.hero-note{font-size:.7rem}.hero h1{font-size:clamp(3rem,14vw,4.25rem)}.hero-copy{font-size:1rem}.hero-actions .btn{width:100%}.micro{justify-content:center;text-align:center}.visual{min-height:350px}.float-label{font-size:.65rem;padding:10px}.float-label.one{top:10%;left:0}.tv-shell{top:17%;height:60%}.luxite{width:75%}.number{font-size:1.45rem}.stats .stat{gap:10px}.features,.steps,.plans{grid-template-columns:1fr}.feature{padding:24px}.partner{font-size:.82rem;padding:15px 5px;min-height:66px}.partners{gap:8px}.plans-controls{display:grid;justify-content:stretch}.control{justify-content:space-between}.control-label{font-size:.68rem}.plans{gap:12px}.plan{padding:20px}.plan ul{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px}.plan li{margin-bottom:0}.plan .btn{width:100%}.footer-grid{grid-template-columns:1fr;gap:24px}.footer-grid>div:last-child{grid-column:auto}.wa-float span{display:none}.wa-float{border-radius:50%;padding:13px}.closing-card{padding:35px 18px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  
+    /* Lux Play art direction 2026: midnight cinema, luminous amethyst, warm highlights. */
+    :root {--bg:#09060f;--surface:#16101e;--surface2:#211329;--purple:#ac5aff;--purple2:#7733ef;--border:rgba(213,180,244,.15);}
+    body{font-family:"Manrope",sans-serif;font-size:15px;background:#09060f}
+    h1,h2,h3,h4,.brand,.value,.number,.plan h3{font-family:"Syne",sans-serif}
+    h1{font-weight:800;letter-spacing:-.065em}
+    .wordmark{display:block;width:211px;height:auto;max-height:65px;object-fit:contain;object-position:left center}
+    footer .wordmark{width:195px}
+    .brand{gap:0}
+    .site-header{background:rgba(9,6,15,.84);box-shadow:0 10px 40px rgba(0,0,0,.16)}
+    .nav a{letter-spacing:-.015em}
+    .nav a:hover{color:#d3a6ff}
+    .btn{border-radius:12px}
+    .btn-primary{background:#a45bf4;color:#0f0719;box-shadow:0 7px 28px rgba(161,63,252,.16)}
+    .btn-primary:hover{background:#c38aff}
+    .hero{padding-top:75px;padding-bottom:75px}
+    .hero-grid{grid-template-columns:.98fr 1.02fr;gap:24px}
+    .hero-note{background:rgba(214,157,255,.07);border-color:rgba(189,121,255,.25);color:#e2c1ff;letter-spacing:.045em}
+    .hero-copy{max-width:520px}
+    .gradient{background:linear-gradient(120deg,#fff 5%,#e6c8ff 41%,#a75efa 82%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .visual{min-height:620px;position:relative;isolation:isolate;overflow:visible}
+    .visual:before{inset:10% -8%;border-radius:40%;background:radial-gradient(circle at 50% 47%,rgba(147,74,224,.28),rgba(59,21,111,.06) 44%,transparent 68%);filter:blur(20px)}
+    .hero-orbit{position:absolute;inset:10% 0%;border-radius:50%;border:1px solid rgba(185,119,248,.15);pointer-events:none}
+    .orbit-a{transform:rotate(-22deg) scaleY(.77)}
+    .orbit-b{transform:rotate(32deg) scaleY(.72);inset:14% 3%;border-color:rgba(225,190,255,.1)}
+    .cinema-frame{width:92%;height:390px;position:absolute;top:13%;right:-3%;overflow:hidden;border-radius:26px;border:1px solid rgba(210,144,253,.38);background:#120d1c;box-shadow:0 30px 90px rgba(0,0,0,.52),0 0 60px rgba(111,45,188,.18);transform:perspective(1200px) rotateY(-9deg) rotateX(1deg)}
+    .frame-header{height:54px;display:flex;align-items:center;gap:10px;padding:0 22px;font-size:.66rem;letter-spacing:.18em;font-weight:800;border-bottom:1px solid rgba(255,255,255,.06);color:#e9d1fa}
+    .frame-led{width:7px;height:7px;background:#ba78ff;border-radius:50%;box-shadow:0 0 15px #ac5aff}
+    .frame-4k{margin-left:auto;font-size:.63rem;color:#9884b1}
+    .frame-feature{padding:30px 26px;height:235px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:13px;background:radial-gradient(ellipse at 75% 35%,rgba(174,106,230,.26),transparent 39%),linear-gradient(120deg,#271337,#100d1f)}
+    .frame-kicker{font-size:.56rem;letter-spacing:.17em;color:#b8a6c6;font-weight:800}
+    .frame-feature strong{font:800 clamp(1.7rem,3.1vw,2.55rem)/1.07 "Syne",sans-serif;letter-spacing:-.05em}
+    .frame-play{display:inline-flex;align-items:center;gap:6px;background:#ede0ff;color:#190e28;padding:7px 11px;border-radius:9px;font-size:.65rem;font-weight:800}
+    .frame-play svg{width:12px;height:12px;fill:currentColor}
+    .frame-covers{height:90px;padding:10px 15px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .frame-covers span{border-radius:8px;background:linear-gradient(140deg,#58318b,#27183e 56%,#b3609e)}
+    .frame-covers span:nth-child(2){background:linear-gradient(120deg,#193a5b,#785eb9)}
+    .frame-covers span:nth-child(3){background:linear-gradient(120deg,#56314d,#ce815c)}
+    .frame-covers span:nth-child(4){background:linear-gradient(120deg,#151831,#725bbc)}
+    .frame-covers span:nth-child(5){background:linear-gradient(120deg,#43293d,#985ab8)}
+    .hero-mascot{position:absolute;z-index:3;width:min(88%,510px);height:auto;bottom:-8px;left:-13%;filter:drop-shadow(0 28px 22px rgba(0,0,0,.55)) drop-shadow(0 0 23px rgba(179,84,254,.16));transition:transform .55s cubic-bezier(.2,.8,.2,1);animation:mascotEnter 1s both cubic-bezier(.16,.9,.3,1)}
+    .visual:hover .hero-mascot{transform:translateY(-9px) rotate(-1deg)}
+    .float-label{display:flex;align-items:center;gap:9px;background:rgba(26,17,37,.95);border-color:rgba(192,117,245,.28);font-family:Manrope,sans-serif;font-size:.73rem;white-space:nowrap}
+    .float-label svg{height:16px;width:16px;color:#c790ff}
+    .float-label.one{top:7%;left:3%;transform:rotate(-5deg);z-index:4}
+    .float-label.two{bottom:5%;right:0;transform:rotate(4deg);z-index:4}
+    .stat-grid{gap:22px}.stat-icon{display:grid;place-items:center;height:44px;width:44px;background:rgba(155,75,229,.1);border:1px solid rgba(173,115,222,.23);border-radius:13px;color:#d0a1fc}
+    .stat-icon svg{width:22px;height:22px;stroke-width:1.8}
+    .number{font-weight:800;font-size:1.62rem;letter-spacing:-.045em}
+    .stat+.stat{padding-left:22px}
+    .features{grid-template-columns:1.1fr .92fr .92fr;gap:18px}
+    .feature{min-height:265px;transition:transform .25s ease,border-color .25s}
+    .feature:first-child{background:linear-gradient(136deg,rgba(65,31,82,.78),rgba(19,11,30,.96))}
+    .feature:hover{transform:translateY(-5px);border-color:rgba(216,156,255,.42)}
+    .feature-icon{background:rgba(166,86,238,.1);border-color:rgba(205,141,247,.18)}
+    .feature-icon svg{height:25px;width:25px;stroke-width:1.65}
+    .device svg{height:19px;width:19px;color:#cf99ff;stroke-width:1.7;flex-shrink:0}
+    .devices-grid{grid-template-columns:1.05fr .95fr}
+    .showcase{position:relative;min-height:470px;overflow:hidden;border-radius:32px;background:radial-gradient(circle at 44% 32%,rgba(162,73,255,.29),transparent 50%),linear-gradient(150deg,#2c1740,#110b20 70%);isolation:isolate}
+    .showcase:after{content:"";position:absolute;left:-12%;right:-12%;bottom:-38%;height:68%;border-radius:50%;border:1px solid rgba(189,115,255,.21);transform:rotate(-9deg)}
+    .boy-mascot{position:absolute;z-index:2;width:100%;height:97%;object-fit:contain;object-position:center bottom;bottom:0;filter:drop-shadow(0 24px 28px rgba(0,0,0,.45))}
+    .showcase-text{position:absolute;z-index:3;left:26px;top:27px;display:flex;align-items:center;gap:8px;font-family:Syne;font-weight:750;font-size:1rem;background:rgba(15,10,25,.72);border:1px solid rgba(214,161,255,.26);padding:12px 14px;border-radius:15px}
+    .showcase-text svg{height:18px;width:18px;color:#d6a8ff}
+    .showcase-caption{z-index:4;position:absolute;right:24px;bottom:20px;border:1px solid rgba(231,199,255,.25);border-radius:20px;padding:9px 14px;background:rgba(10,7,15,.75);font-weight:800;font-size:.67rem;letter-spacing:.08em}
+    .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#bb83ff;box-shadow:0 0 10px #c689ff;margin-right:7px}
+    .partner-heading{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:1.05rem;margin:64px 0 22px}
+    .partner-heading span{font-size:.7rem;font-family:Manrope;letter-spacing:.15em;text-transform:uppercase;color:#c294e8;font-weight:800}
+    .partner-heading strong{font-family:Syne;font-size:1.3rem;letter-spacing:-.025em}
+    .partners{gap:10px}
+    .partner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:128px;font:800 .89rem/1.2 Syne,sans-serif;letter-spacing:-.025em}
+    .partner small{font-size:.7rem}
+    .partner-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:linear-gradient(160deg,rgba(150,68,236,.25),rgba(64,32,89,.27));border:1px solid rgba(192,130,252,.25);font-family:Syne;font-weight:800;font-size:1.25rem;color:#efdbff}
+    .step{min-height:250px}
+    .step-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;border:1px solid var(--border);color:#d4a9fa}
+    .step-icon svg{width:20px;height:20px}
+    .step-no{font-size:2.4rem;color:#b785e2;margin:10px 0 11px}
+    .plan{transition:transform .25s ease,border-color .25s}
+    .plan:hover{transform:translateY(-3px);border-color:rgba(187,114,249,.45)}
+    .closing-card{background:radial-gradient(circle at 83% 25%,rgba(164,72,248,.27),transparent 43%),linear-gradient(125deg,#322042,#171022 72%)}
+    .btn svg{height:18px;width:18px}
+    .menu-toggle svg{width:24px;height:24px}
+    @keyframes mascotEnter{from{opacity:0;translate:0 30px}to{opacity:1;translate:0 0}}
+    @media(max-width:1050px){.visual{min-height:535px}.cinema-frame{height:345px}.hero-mascot{width:90%}.frame-feature{height:195px}}
+    @media(max-width:780px){.wordmark{width:185px}.hero-grid{grid-template-columns:1fr}.visual{min-height:480px;max-width:570px;width:100%;margin:auto}.hero-mascot{width:77%;left:-1%}.cinema-frame{right:0;width:85%;top:16%}.features{grid-template-columns:1fr 1fr}.devices-grid{grid-template-columns:1fr}.showcase{min-height:420px}.boy-mascot{height:100%}}
+    @media(max-width:520px){.wordmark{width:163px}.hero{padding-top:53px}.hero h1{font-size:clamp(2.8rem,13vw,4.15rem)}.visual{min-height:367px;max-width:410px}.cinema-frame{height:255px;right:-1%;width:89%;border-radius:16px}.frame-header{height:37px;padding:0 11px;font-size:.48rem}.frame-feature{height:157px;padding:18px 15px;gap:8px}.frame-feature strong{font-size:1.6rem}.frame-covers{height:60px;padding:7px;gap:5px}.frame-kicker{font-size:.42rem}.frame-play{font-size:.57rem}.hero-mascot{width:81%;left:-8%;bottom:-13px}.float-label.one{top:7%;left:0;font-size:.56rem}.float-label.two{right:-4%;bottom:5%;font-size:.56rem}.float-label svg{width:13px;height:13px}.stats .stat{gap:8px}.stat-icon{width:36px;height:36px}.stat-icon svg{width:18px;height:18px}.number{font-size:1.23rem}.features{grid-template-columns:1fr}.showcase{min-height:360px}.partners{grid-template-columns:repeat(3,1fr)}.partner{min-height:104px;font-size:.73rem}.partner-mark{height:37px;width:37px}.partner-heading strong{font-size:1rem}.step{min-height:0}}
+    @media(prefers-reduced-motion:reduce){.hero-mascot{animation:none}.visual:hover .hero-mascot{transform:none}}
+
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="wrap header-in">
-      <a class="brand" href="#inicio" aria-label="Lux Play, início"><img class="brand-icon" src="lux.svg" alt=""><b>LUX PLAY</b></a>
+      <a class="brand" href="#inicio" aria-label="Lux Play, início"><img class="wordmark" src="LUXPLAY.png" width="211" height="63" alt="Lux Play"></a>
       <nav class="nav" id="site-nav" aria-label="Navegação principal">
         <a href="#beneficios">Por que Lux?</a><a href="#dispositivos">Dispositivos</a><a href="#como-funciona">Como funciona</a><a href="#planos">Planos</a><a href="#perguntas">Dúvidas</a>
       </nav>
       <div class="header-cta">
         <a class="btn btn-primary" data-whatsapp="teste" target="_blank" rel="noopener noreferrer" href="https://wa.me/5511980024737">Teste grátis ↗</a>
         <button class="menu-toggle" id="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <i data-lucide="menu" aria-hidden="true"></i>
         </button>
       </div>
     </div>
@@ -194,53 +281,43 @@
           <h1>Tudo o que você ama. <span class="gradient">Em um só lugar.</span></h1>
           <p class="hero-copy">Filmes para maratonar, séries para acompanhar, TV ao vivo e muito mais. Seu entretenimento, do seu jeito — em uma experiência que só melhora.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" data-whatsapp="teste" target="_blank" rel="noopener noreferrer" href="https://wa.me/5511980024737">▶ Testar grátis por até 6 horas</a>
+            <a class="btn btn-primary" data-whatsapp="teste" target="_blank" rel="noopener noreferrer" href="https://wa.me/5511980024737"><i data-lucide="play" aria-hidden="true"></i> Testar grátis por até 6 horas</a>
             <a class="btn btn-quiet" href="#planos">Conhecer os planos ↓</a>
           </div>
           <div class="micro"><span aria-hidden="true">●</span> Sem cartão de crédito para solicitar o teste. Ativação sujeita à disponibilidade.</div>
         </div>
-        <div class="visual" aria-label="Ilustração do mascote Luxite apresentando a Lux Play na TV" role="img">
-          <div class="visual-ring" aria-hidden="true"></div>
-          <div class="tv-shell" aria-hidden="true"><div class="tv-screen"><div class="tiny-logo">LUX <span>PLAY</span></div><div class="screen-bar"><span>Início</span><span>Filmes</span><span>Séries</span><span>TV</span></div><div class="hero-tiles"><span></span><span></span><span></span><span></span><span></span></div></div></div>
-          <svg class="luxite" viewBox="0 0 410 470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5cfff"/><stop offset=".31" stop-color="#a55bec"/><stop offset=".72" stop-color="#432270"/><stop offset="1" stop-color="#c18eff"/></linearGradient><linearGradient id="suit" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#472866"/><stop offset=".62" stop-color="#150c26"/><stop offset="1" stop-color="#5a2781"/></linearGradient><radialGradient id="visor"><stop stop-color="#190a32"/><stop offset=".85" stop-color="#080611"/><stop offset="1" stop-color="#351056"/></radialGradient><filter id="shine"><feGaussianBlur stdDeviation="5"/></filter></defs>
-            <path d="M312 263c86-35 98 63 39 95" stroke="#873af0" stroke-width="16" stroke-linecap="round" fill="none"/>
-            <path d="M160 347l-24 62 4 27 80 6 10-82zM235 351l23 60-8 31 82-1 7-24-37-78z" fill="url(#suit)" stroke="#9864cc" stroke-width="9"/>
-            <path d="M129 418c-35 23-29 46 0 47h82c18-10 7-38-17-44zM263 424c-30 18-19 42 3 42h85c31-5 16-35-22-45z" fill="url(#metal)" stroke="#d29dff" stroke-width="5"/>
-            <rect x="144" y="242" width="163" height="145" rx="62" fill="url(#suit)" stroke="#a766f4" stroke-width="9"/>
-            <path d="M151 276c-45-27-73 10-96 28" stroke="url(#metal)" stroke-width="38" stroke-linecap="round"/>
-            <path d="M306 276c35-18 54 3 70 20" stroke="url(#metal)" stroke-width="37" stroke-linecap="round"/>
-            <circle cx="49" cy="316" r="28" fill="url(#suit)" stroke="#c27aff" stroke-width="7"/>
-            <circle cx="378" cy="303" r="27" fill="url(#suit)" stroke="#c27aff" stroke-width="7"/>
-            <path d="M34 306l-3-24m19 19v-28m17 36 16-17" stroke="#c37dff" stroke-width="10" stroke-linecap="round"/>
-            <circle cx="224" cy="314" r="32" fill="#822df4" opacity=".45" filter="url(#shine)"/><circle cx="224" cy="314" r="28" fill="none" stroke="#e6b7ff" stroke-width="5"/><path d="M196 314h56M224 286c-15 14-15 42 0 56M224 286c15 14 15 42 0 56M199 300h49M199 329h49" stroke="#dfbcff" stroke-width="3" fill="none"/>
-            <path d="M99 135c6-91 54-123 124-123 85 0 142 63 130 142" fill="url(#metal)" stroke="#b96eff" stroke-width="11"/>
-            <rect x="65" y="61" width="314" height="204" rx="105" fill="url(#metal)" stroke="#d99dff" stroke-width="8"/>
-            <rect x="86" y="80" width="268" height="170" rx="85" fill="url(#visor)" stroke="#341258" stroke-width="10"/>
-            <path d="M153 154q24-29 39 11q-24 15-39-11M258 166q18-40 43-4q-13 21-43 4" fill="#fbe6ff" stroke="#d56bff" stroke-width="7"/>
-            <path d="M199 207q25 21 50 0" stroke="#ca6aff" stroke-width="6" stroke-linecap="round" fill="none"/>
-            <circle cx="84" cy="170" r="54" fill="url(#metal)" stroke="#7e38d7" stroke-width="10"/><circle cx="361" cy="170" r="54" fill="url(#metal)" stroke="#7e38d7" stroke-width="10"/>
-            <circle cx="84" cy="170" r="34" fill="#6e33b1" stroke="#d5a1ff" stroke-width="6"/><circle cx="361" cy="170" r="34" fill="#6e33b1" stroke="#d5a1ff" stroke-width="6"/>
-          </svg>
-          <div class="float-label one">✨ Um universo de opções</div><div class="float-label two">🍿 Seu momento, seu filme</div>
-        </div>
+        <div class="visual" aria-label="Luxite, o mascote original Lux Play, em cenário de cinema" role="group">
+  <div class="hero-orbit orbit-a" aria-hidden="true"></div>
+  <div class="hero-orbit orbit-b" aria-hidden="true"></div>
+  <div class="cinema-frame" aria-hidden="true">
+    <div class="frame-header">
+      <span class="frame-led"></span><span>SESSÃO LUX</span>
+      <span class="frame-4k">4K · HDR</span>
+    </div>
+    <div class="frame-feature"><span class="frame-kicker">A EXPERIÊNCIA COMEÇA AQUI</span><strong>A sua próxima<br>grande história.</strong><span class="frame-play"><i data-lucide="play"></i> Dê o play</span></div>
+    <div class="frame-covers"><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+  <img class="hero-mascot" src="luxite-full.png" width="560" height="664" alt="Luxite, o robô mascote roxo e sorridente da Lux Play" fetchpriority="high">
+  <div class="float-label one"><i data-lucide="clapperboard"></i><span>Uma nova história por dia</span></div>
+  <div class="float-label two"><i data-lucide="sparkles"></i><span>Entretenimento do seu jeito</span></div>
+</div>
       </div>
     </section>
     <div class="stats" aria-label="Números aproximados do catálogo">
       <div class="wrap stat-grid">
-        <div class="stat"><span class="stat-icon" aria-hidden="true">▣</span><div><div class="number">+3.800</div><div class="stat-label">opções de canais</div></div></div>
-        <div class="stat"><span class="stat-icon" aria-hidden="true">◩</span><div><div class="number">+38 mil</div><div class="stat-label">filmes</div></div></div>
-        <div class="stat"><span class="stat-icon" aria-hidden="true">▤</span><div><div class="number">+13 mil</div><div class="stat-label">séries</div></div></div>
-        <div class="stat"><span class="stat-icon" aria-hidden="true">✦</span><div><div class="number">Até 6h</div><div class="stat-label">de teste gratuito</div></div></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true"><i data-lucide="tv"></i></span><div><div class="number">+3.800</div><div class="stat-label">opções de canais</div></div></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true"><i data-lucide="clapperboard"></i></span><div><div class="number">+38 mil</div><div class="stat-label">filmes</div></div></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true"><i data-lucide="monitor-play"></i></span><div><div class="number">+13 mil</div><div class="stat-label">séries</div></div></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true"><i data-lucide="clock-3"></i></span><div><div class="number">Até 6h</div><div class="stat-label">de teste gratuito</div></div></div>
       </div>
     </div>
     <section id="beneficios">
       <div class="wrap">
-        <div class="section-intro"><span class="eyebrow">POR QUE LUX PLAY</span><h2>Mais do que assistir.<br><span class="gradient">É aproveitar cada momento.</span></h2><p>Uma experiência pensada para tornar a escolha do que assistir tão boa quanto a sessão.</p></div>
+        <div class="section-intro"><span class="eyebrow">EXPERIÊNCIA LUX</span><h2>Mais do que assistir.<br><span class="gradient">É aproveitar cada momento.</span></h2><p>Uma experiência pensada para tornar a escolha do que assistir tão boa quanto a sessão.</p></div>
         <div class="features">
-          <article class="card feature"><div class="feature-icon">✦</div><h3>Um catálogo de possibilidades</h3><p>De grandes histórias a programação ao vivo. Descubra filmes, séries e canais em um só lugar, com atualizações periódicas.</p></article>
-          <article class="card feature"><div class="feature-icon">▣</div><h3>Qualidade para sua tela</h3><p>Opções em HD, Full HD e até 4K em conteúdos compatíveis. A resolução depende do título, do aplicativo e da conexão.</p></article>
-          <article class="card feature"><div class="feature-icon">♡</div><h3>Atendimento próximo</h3><p>Precisa escolher um aplicativo ou configurar seu acesso? Você pode falar diretamente conosco pelo WhatsApp.</p></article>
+          <article class="card feature"><div class="feature-icon"><i data-lucide="clapperboard" aria-hidden="true"></i></div><h3>Um catálogo de possibilidades</h3><p>De grandes histórias a programação ao vivo. Descubra filmes, séries e canais em um só lugar, com atualizações periódicas.</p></article>
+          <article class="card feature"><div class="feature-icon"><i data-lucide="monitor-play" aria-hidden="true"></i></div><h3>Qualidade para sua tela</h3><p>Opções em HD, Full HD e até 4K em conteúdos compatíveis. A resolução depende do título, do aplicativo e da conexão.</p></article>
+          <article class="card feature"><div class="feature-icon"><i data-lucide="headset" aria-hidden="true"></i></div><h3>Atendimento próximo</h3><p>Precisa escolher um aplicativo ou configurar seu acesso? Você pode falar diretamente conosco pelo WhatsApp.</p></article>
         </div>
       </div>
     </section>
@@ -250,13 +327,30 @@
           <div>
             <span class="eyebrow">LIBERDADE PARA ASSISTIR</span><h2>Seu entretenimento <span class="gradient">acompanha você.</span></h2>
             <p>Na sala, no quarto ou em qualquer cantinho da casa. Consulte o aplicativo compatível com seu aparelho e receba orientação para configurar seu acesso.</p>
-            <div class="devices-list"><div class="device"><strong>▣</strong> Smart TV</div><div class="device"><strong>▤</strong> Celular</div><div class="device"><strong>▱</strong> Tablet</div><div class="device"><strong>▥</strong> Computador</div><div class="device"><strong>▣</strong> TV Box</div><div class="device"><strong>✦</strong> Outros aparelhos*</div></div>
+            <div class="devices-list">
+  <div class="device"><i data-lucide="tv" aria-hidden="true"></i>Smart TV</div>
+  <div class="device"><i data-lucide="smartphone" aria-hidden="true"></i>Celular</div>
+  <div class="device"><i data-lucide="tablet" aria-hidden="true"></i>Tablet</div>
+  <div class="device"><i data-lucide="laptop" aria-hidden="true"></i>Computador</div>
+  <div class="device"><i data-lucide="monitor-play" aria-hidden="true"></i>TV Box</div>
+  <div class="device"><i data-lucide="gamepad-2" aria-hidden="true"></i>Outros aparelhos*</div>
+</div>
             <p style="font-size:.76rem;margin:15px 0 0">*A compatibilidade depende do sistema operacional e do aplicativo utilizado.</p>
           </div>
-          <div class="showcase" aria-hidden="true"><div class="device-art"><div class="device-screen"><b>LUX <span style="color:#cc96ff">PLAY</span></b><i></i><small>Filmes · Séries · TV</small></div><div class="device-screen mobile"><b style="font-size:.8rem">LUX <span style="color:#cc96ff">PLAY</span></b><i></i><small style="font-size:.55rem">Onde quiser</small></div></div></div>
+          <div class="showcase">
+  <div class="showcase-text"><i data-lucide="play-circle" aria-hidden="true"></i><span>O próximo play é seu.</span></div>
+  <img class="boy-mascot" src="luxy.png" width="620" height="640" alt="Garoto Lux, mascote da Lux Play, apresentando o entretenimento" loading="lazy" decoding="async">
+  <div class="showcase-caption"><span class="status-dot"></span> FILMES · SÉRIES · TV</div>
+</div>
         </div>
-        <h3 class="partner-heading">Aplicativos compatíveis e opções para configuração</h3>
-        <div class="partners" aria-label="Aplicativos mencionados pelos nossos clientes"><div class="partner">Smarters<br>Player Lite</div><div class="partner">ONE<span style="font-size:1.4rem">X</span></div><div class="partner">RX Purple</div><div class="partner">Lótus</div><div class="partner">Vuser</div></div>
+        <h3 class="partner-heading"><span>Integrações e compatibilidade</span><strong>Conheça os apps utilizados pelos nossos clientes</strong></h3>
+        <div class="partners" aria-label="Aplicativos compatíveis, desenvolvidos por terceiros">
+  <div class="partner"><span class="partner-mark">S</span><span>Smarters<br><small>Player Lite</small></span></div>
+  <div class="partner"><span class="partner-mark">X</span><span>OneX</span></div>
+  <div class="partner"><span class="partner-mark">RX</span><span>RX Purple</span></div>
+  <div class="partner"><span class="partner-mark">L</span><span>Lótus</span></div>
+  <div class="partner"><span class="partner-mark">V</span><span>Vuser</span></div>
+</div>
         <p class="partners-note">Aplicativos desenvolvidos por terceiros. Disponibilidade, licenças e recursos variam por dispositivo. As marcas pertencem aos respectivos titulares.</p>
       </div>
     </section>
@@ -264,9 +358,9 @@
       <div class="wrap">
         <div class="section-intro"><span class="eyebrow">SIMPLES ASSIM</span><h2>Você pede. A gente orienta. <span class="gradient">Você aproveita.</span></h2><p>Três passos para conhecer a experiência Lux Play.</p></div>
         <div class="steps">
-          <div class="card step"><div class="step-no">01</div><h3>Chame no WhatsApp</h3><p>Conte em qual aparelho deseja assistir e tire suas dúvidas com nosso atendimento.</p></div>
-          <div class="card step"><div class="step-no">02</div><h3>Solicite seu teste</h3><p>Conheça o serviço com um período gratuito de até 6 horas, sujeito à disponibilidade de ativação.</p></div>
-          <div class="card step"><div class="step-no">03</div><h3>Escolha seu plano</h3><p>Se gostar da experiência, escolha o período e a quantidade de telas que melhor combinam com você.</p></div>
+          <div class="card step"><div class="step-icon"><i data-lucide="message-circle" aria-hidden="true"></i></div><div class="step-no">01</div><h3>Chame no WhatsApp</h3><p>Conte em qual aparelho deseja assistir e tire suas dúvidas com nosso atendimento.</p></div>
+          <div class="card step"><div class="step-icon"><i data-lucide="ticket-check" aria-hidden="true"></i></div><div class="step-no">02</div><h3>Solicite seu teste</h3><p>Conheça o serviço com um período gratuito de até 6 horas, sujeito à disponibilidade de ativação.</p></div>
+          <div class="card step"><div class="step-icon"><i data-lucide="badge-check" aria-hidden="true"></i></div><div class="step-no">03</div><h3>Escolha seu plano</h3><p>Se gostar da experiência, escolha o período e a quantidade de telas que melhor combinam com você.</p></div>
         </div>
       </div>
     </section>
@@ -300,14 +394,14 @@
     </section>
     <section class="closing" id="contato">
       <div class="wrap">
-        <div class="closing-card"><span class="eyebrow">SEU PRÓXIMO PLAY COMEÇA AQUI</span><h2>Pronto para descobrir seu novo favorito?</h2><p>Converse com a gente, tire suas dúvidas e solicite um teste grátis de até 6 horas.</p><a class="btn btn-green" data-whatsapp="teste" href="https://wa.me/5511980024737" target="_blank" rel="noopener noreferrer">Conversar no WhatsApp ↗</a></div>
+        <div class="closing-card"><span class="eyebrow">SEU PRÓXIMO PLAY COMEÇA AQUI</span><h2>Pronto para descobrir seu novo favorito?</h2><p>Converse com a gente, tire suas dúvidas e solicite um teste grátis de até 6 horas.</p><a class="btn btn-green" data-whatsapp="teste" href="https://wa.me/5511980024737" target="_blank" rel="noopener noreferrer"><i data-lucide="message-circle" aria-hidden="true"></i> Conversar no WhatsApp</a></div>
       </div>
     </section>
   </main>
   <footer>
     <div class="wrap">
       <div class="footer-grid">
-        <div><a class="brand" href="#inicio"><img class="brand-icon" src="lux.svg" alt=""><b>LUX PLAY</b></a><p style="max-width:330px;margin-top:16px">Filmes, séries e TV em uma experiência feita para seu tempo livre. Catálogo e compatibilidade sujeitos a mudanças.</p></div>
+        <div><a class="brand" href="#inicio"><img class="wordmark" src="LUXPLAY.png" width="195" height="58" alt="Lux Play"></a><p style="max-width:330px;margin-top:16px">Filmes, séries e TV em uma experiência feita para seu tempo livre. Catálogo e compatibilidade sujeitos a mudanças.</p></div>
         <div><h4>Explore</h4><ul><li><a href="#beneficios">Benefícios</a></li><li><a href="#dispositivos">Dispositivos</a></li><li><a href="#planos">Preços e planos</a></li><li><a href="#perguntas">Perguntas frequentes</a></li></ul></div>
         <div><h4>Atendimento</h4><ul><li><a href="https://wa.me/5511980024737" data-whatsapp="suporte" target="_blank" rel="noopener noreferrer">WhatsApp: (11) 98002-4737</a></li><li><a href="https://www.instagram.com/player.lux/" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="#privacidade">Privacidade</a></li></ul></div>
       </div>
@@ -355,5 +449,7 @@
       render();
     })();
   </script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script>window.addEventListener("load",function(){if(window.lucide&&typeof lucide.createIcons==="function"){lucide.createIcons();}});</script>
 </body>
 </html>

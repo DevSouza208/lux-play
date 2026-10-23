@@ -613,8 +613,8 @@
         var base=prices[0][key];
         document.getElementById("plans-list").innerHTML=prices.map(function(item){
           var total=item[key],month=total/item.months,saving=base*item.months-total;
-          var msg="Olá! Gostaria de contratar o plano Lux Play: "+item.label+", "3 telas"", "+(adult?"com":"sem")+" conteúdo adulto, por "+formatMoney.format(total)+". Pode confirmar a disponibilidade?";
-          return '<article class="plan '+(item.months===3?'featured':'')+'"><span class="popular">'+(item.months===3?'MELHOR ESCOLHA':'PLANO LUX')+'</span><h3>'+item.label+'</h3><small>'3 telas'' · '+(adult?'Com':'Sem')+' adulto</small><div class="value"><span>R$</span> '+total+'</div><div class="monthly">'+formatMoney.format(month)+'/mês'+(saving>0?' · economize '+formatMoney.format(saving):'')+'</div><ul><li>Atendimento por WhatsApp</li><li>Período pré-pago</li><li>Catálogo variado</li></ul><a class="btn '+(item.months===3?'btn-primary':'btn-quiet')+'" target="_blank" rel="noopener noreferrer" href="'+waBase+encodeURIComponent(msg)+'">Escolher plano ↗</a></article>';
+          var msg="Olá! Gostaria de contratar o plano Lux Play: "+item.label+", 3 telas, "+(adult?"com":"sem")+" conteúdo adulto, por "+formatMoney.format(total)+". Pode confirmar a disponibilidade?";
+          return '<article class="plan '+(item.months===3?'featured':'')+'"><span class="popular">'+(item.months===3?'MELHOR ESCOLHA':'PLANO LUX')+'</span><h3>'+item.label+'</h3><small>3 telas · '+(adult?'Com':'Sem')+' adulto</small><div class="value"><span>R$</span> '+total+'</div><div class="monthly">'+formatMoney.format(month)+'/mês'+(saving>0?' · economize '+formatMoney.format(saving):'')+'</div><ul><li>Atendimento por WhatsApp</li><li>Período pré-pago</li><li>Catálogo variado</li></ul><a class="btn '+(item.months===3?'btn-primary':'btn-quiet')+'" target="_blank" rel="noopener noreferrer" href="'+waBase+encodeURIComponent(msg)+'">Escolher plano ↗</a></article>';
         }).join("");
         document.querySelectorAll("[data-adult]").forEach(function(btn){btn.setAttribute("aria-pressed",String((btn.getAttribute("data-adult")==="yes")===adult));});
       }

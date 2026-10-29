@@ -345,64 +345,125 @@
     @media(prefers-reduced-motion:reduce){.device-boy,.app-logo-card{transition:none}.device-stage:hover .device-boy{transform:translateX(-50%)}}
 
   
-    /* Partner-logo polish — scope deliberately limited to the devices gallery. */
+    /* Galeria de aplicativos: acabamento integrado, sem moldura dupla. */
     .partner-gallery{margin-top:88px}
-    .partner-gallery-heading{margin-bottom:25px}
+    .partner-gallery-heading{margin-bottom:28px}
     .partner-gallery-heading h3{font-size:clamp(1.9rem,3vw,2.65rem);line-height:1.18}
-    .partner-gallery-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}
+    .partner-gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:16px;
+    }
     .partner-gallery-grid .app-logo-card{
-      display:flex;flex-direction:column;min-width:0;min-height:214px;padding:9px;
-      border-radius:18px;background:#171021;border:1px solid rgba(200,154,239,.16);
-      box-shadow:inset 0 1px rgba(255,255,255,.035);
-      transition:border-color .2s ease,background .2s ease,transform .2s ease;
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+      padding:11px;
+      border-radius:22px;
+      background:linear-gradient(160deg,#211629 0%,#17101f 100%);
+      border:1px solid rgba(209,168,239,.15);
+      box-shadow:0 8px 24px rgba(0,0,0,.10),inset 0 1px 0 rgba(255,255,255,.035);
+      transition:transform .23s ease,border-color .23s ease,box-shadow .23s ease;
     }
     .partner-gallery-grid .app-logo-card:hover{
-      transform:translateY(-3px);border-color:rgba(201,143,250,.55);
-      background:#20152e;
+      transform:translateY(-4px);
+      border-color:rgba(205,151,252,.38);
+      box-shadow:0 14px 28px rgba(0,0,0,.17),inset 0 1px 0 rgba(255,255,255,.055);
     }
     .partner-gallery-grid .app-logo-frame{
-      background:#0c0912;border:1px solid rgba(255,255,255,.045);
-      border-radius:12px;width:100%;height:auto;aspect-ratio:1 / 1;display:grid;place-items:center;
-      overflow:hidden;padding:12px;
+      position:relative;
+      display:grid;
+      place-items:center;
+      width:100%;
+      height:auto;
+      aspect-ratio:1;
+      overflow:hidden;
+      padding:0;
+      border:0;
+      border-radius:15px;
+      background:radial-gradient(ellipse at 50% 36%,rgba(107,66,143,.22) 0%,rgba(27,18,39,.62) 56%,#110c19 100%);
     }
     .partner-gallery-grid .app-logo-frame img{
-      display:block;height:100%;width:100%;max-width:100%;max-height:100%;
-      object-fit:contain;object-position:center;
+      display:block;
+      width:100%;
+      height:100%;
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      object-position:center;
+      border-radius:12px;
+      transition:transform .27s ease;
+    }
+    .partner-gallery-grid .app-logo-card:hover .app-logo-frame img{transform:scale(1.025)}
+    /* Logos com fundo preto próprio se integram ao fundo do card, sem alterar as cores. */
+    .partner-gallery-grid .app-logo-card:nth-child(3) .app-logo-frame img,
+    .partner-gallery-grid .app-logo-card:nth-child(4) .app-logo-frame img{
+      width:94%;
+      height:94%;
+      mix-blend-mode:screen;
+      border-radius:0;
     }
     .partner-gallery-grid .app-meta{
-      flex:1;display:flex;flex-direction:column;align-items:flex-start;
-      justify-content:center;gap:3px;padding:12px 7px 5px;color:#f5effb;
-      min-width:0;line-height:1.2;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      gap:6px;
+      min-width:0;
+      min-height:70px;
+      padding:14px 6px 6px;
+      color:#f5effb;
+      line-height:1.25;
     }
     .partner-gallery-grid .app-meta-kicker{
-      font:700 .55rem/1.2 "DM Sans",sans-serif;letter-spacing:.095em;color:#a18daf;
+      font:700 .58rem/1.2 "DM Sans",sans-serif;
+      letter-spacing:.08em;
+      color:#ac97bb;
     }
     .partner-gallery-grid .app-meta strong{
-      font:700 .91rem/1.26 "Outfit",sans-serif;letter-spacing:-.018em;
-      white-space:normal;overflow-wrap:break-word;
+      font:700 1rem/1.25 "Outfit",sans-serif;
+      letter-spacing:-.018em;
+      white-space:normal;
+      overflow-wrap:break-word;
     }
-        .partner-gallery-disclaimer{max-width:810px;margin:19px auto 0}
+    .partner-gallery-disclaimer{max-width:810px;margin:21px auto 0}
     @media(max-width:960px){
-      .partner-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .partner-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
     }
     @media(max-width:620px){
       .partner-gallery{margin-top:52px}
       .partner-gallery-grid{
-        display:flex;overflow-x:auto;overflow-y:hidden;gap:12px;
-        scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;
-        padding:2px 2px 13px;margin:0 -2px;
-        scrollbar-width:thin;scrollbar-color:#65417e transparent;
+        display:flex;
+        overflow-x:auto;
+        overflow-y:hidden;
+        gap:12px;
+        scroll-snap-type:x mandatory;
+        overscroll-behavior-inline:contain;
+        padding:2px 2px 12px;
+        margin:0 -2px;
+        scrollbar-width:thin;
+        scrollbar-color:#65417e transparent;
       }
-      .partner-gallery-grid .app-logo-card{flex:0 0 min(66vw,240px);scroll-snap-align:start;min-height:211px}
-      .partner-gallery-grid .app-logo-frame{height:auto;aspect-ratio:1 / 1}
+      .partner-gallery-grid .app-logo-card{
+        flex:0 0 min(67vw,240px);
+        scroll-snap-align:start;
+        min-height:0;
+      }
       .partner-gallery-grid .app-logo-card:last-child{
-        grid-column:auto;width:auto;max-width:none;justify-self:auto;
+        grid-column:auto;
+        width:auto;
+        max-width:none;
+        justify-self:auto;
       }
+      .partner-gallery-grid .app-logo-frame{aspect-ratio:1}
       .partner-gallery-heading p{font-size:.87rem}
-      .partner-gallery-disclaimer{margin-top:11px}
+      .partner-gallery-disclaimer{margin-top:12px;text-align:left;justify-content:flex-start}
     }
-    @media(prefers-reduced-motion:reduce){.partner-gallery-grid .app-logo-card{transition:none}}
-
+    @media(prefers-reduced-motion:reduce){
+      .partner-gallery-grid .app-logo-card,
+      .partner-gallery-grid .app-logo-frame img{transition:none}
+    }
 
     /* Grade de plataformas: visual Lux Play, sem interferir nos planos. */
     .platform-gallery{margin:76px 0 0}

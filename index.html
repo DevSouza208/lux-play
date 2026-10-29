@@ -403,6 +403,36 @@
     }
     @media(prefers-reduced-motion:reduce){.partner-gallery-grid .app-logo-card{transition:none}}
 
+
+    /* Grade de plataformas: visual Lux Play, sem interferir nos planos. */
+    .platform-gallery{margin:76px 0 0}
+    .platform-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;margin-bottom:30px}
+    .platform-intro h3{font:750 clamp(1.8rem,3vw,2.7rem)/1.12 "Outfit",sans-serif;letter-spacing:-.035em;margin:12px 0 0}
+    .platform-intro h3 span{color:#ca91ff}
+    .platform-intro p{max-width:440px;margin:0;font-size:.9rem;line-height:1.65}
+    .platform-category{margin-top:26px}
+    .platform-category h4{display:flex;align-items:center;gap:12px;margin:0 0 14px;color:#cbb0e0;font:800 .78rem/1.35 "DM Sans",sans-serif;letter-spacing:.13em;text-transform:uppercase}
+    .platform-category h4:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(205,155,250,.24),transparent)}
+    .platform-category h4 svg{width:19px;height:19px;stroke-width:1.8;color:#bd87f4}
+    .platform-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+    .platform-card{min-width:0;min-height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:17px 10px;text-align:center;background:linear-gradient(150deg,#1c1329,#120d1b);border:1px solid rgba(207,158,250,.16);border-radius:19px;transition:transform .2s,border-color .2s,background .2s}
+    .platform-card:hover{transform:translateY(-3px);border-color:rgba(205,144,255,.48);background:#231731}
+    .platform-logo{display:flex;align-items:center;justify-content:center;min-height:43px;margin-bottom:10px;color:#f5f0fb;font:850 clamp(1.15rem,2vw,1.6rem)/1 "Outfit",sans-serif;letter-spacing:-.035em;white-space:nowrap}
+    .platform-logo svg{height:37px;width:37px;stroke-width:1.8;color:#e9d9ff}
+    .platform-logo.brand-small{font-size:clamp(.94rem,1.5vw,1.34rem);letter-spacing:-.04em}
+    .platform-logo.brand-long{font-size:clamp(.78rem,1.2vw,1.02rem);letter-spacing:-.02em}
+    .platform-card strong{font:750 .88rem/1.24 "Outfit",sans-serif;color:#faf6fe}
+    .platform-card small{font-size:.72rem;color:#aaa0b8;line-height:1.3;margin-top:3px}
+    .platform-status{font:750 .65rem/1.3 "DM Sans",sans-serif;margin-top:12px;padding:5px 10px;background:rgba(183,111,251,.13);color:#dab0ff;border-radius:999px}
+    .platform-status.review{background:rgba(235,176,75,.12);color:#e9b75c}
+    .platform-split{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:8px}
+    .platform-split .platform-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .platform-note{color:#9886a8;font-size:.77rem;line-height:1.6;margin:18px 0 0}
+    @media(max-width:1050px){.platform-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.platform-intro{align-items:flex-start;flex-direction:column;gap:10px}.platform-split .platform-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:780px){.platform-gallery{margin-top:54px}.platform-split{grid-template-columns:1fr;gap:10px}.platform-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.platform-card{min-height:157px}}
+    @media(max-width:520px){.platform-gallery{margin-top:48px}.platform-intro h3{font-size:2rem}.platform-grid,.platform-split .platform-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.platform-card{min-height:149px;padding:14px 8px;border-radius:15px}.platform-logo{font-size:1.42rem}.platform-logo.brand-small{font-size:1.13rem}.platform-logo.brand-long{font-size:.95rem}.platform-logo svg{width:33px;height:33px}.platform-card strong{font-size:.83rem}.platform-card small{font-size:.69rem}}
+    @media(prefers-reduced-motion:reduce){.platform-card{transition:none}}
+
   </style>
 </head>
 <body>
@@ -496,6 +526,49 @@
             <div class="device-stage-bottom"><i data-lucide="play-circle" aria-hidden="true"></i><span>Seu entretenimento.<br><strong>Sem complicação.</strong></span></div>
           </div>
         </div>
+
+        <div class="platform-gallery" id="plataformas">
+          <div class="platform-intro">
+            <div><span class="eyebrow">PLATAFORMAS E DISPOSITIVOS</span><h3>Tem uma tela? <span>Tem um jeito de assistir.</span></h3></div>
+            <p>Encontre o sistema do seu aparelho e conheça as opções de aplicativos para a Lux Play. Nossa equipe ajuda com a escolha e a configuração.</p>
+          </div>
+          <div class="platform-category">
+            <h4><i data-lucide="tv" aria-hidden="true"></i> Smart TVs, TV Box e consoles</h4>
+            <div class="platform-grid">
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="bot" aria-hidden="true"></i></span><strong>Android TV</strong><small>TV Box</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo brand-small" aria-hidden="true">SAMSUNG</span><strong>Samsung</strong><small>Via MSX</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true">LG</span><strong>LG</strong><small>webOS</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true">Roku</span><strong>Roku</strong><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="apple" aria-hidden="true"></i></span><strong>Apple TV</strong><small>tvOS</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="gamepad-2" aria-hidden="true"></i></span><strong>Xbox</strong><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo brand-small" aria-hidden="true">fire tv</span><strong>Fire OS</strong><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo brand-small" aria-hidden="true">vega OS</span><strong>Vega OS</strong><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="download" aria-hidden="true"></i></span><strong>Downloader / NTDown</strong><small>Ferramenta de instalação</small><span class="platform-status">Como instalar</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true">VIDAA</span><strong>VIDAA</strong><small>Via MSX</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo brand-small" aria-hidden="true">TITAN OS</span><strong>TitanOS</strong><small>Via MSX</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo brand-small" aria-hidden="true">whale tv</span><strong>WhaleOS</strong><span class="platform-status review">Em análise</span></article>
+            </div>
+          </div>
+          <div class="platform-split">
+            <div class="platform-category">
+              <h4><i data-lucide="smartphone" aria-hidden="true"></i> Celular e tablet</h4>
+              <div class="platform-grid">
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="smartphone" aria-hidden="true"></i></span><strong>Android</strong><small>Celular e tablet</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="apple" aria-hidden="true"></i></span><strong>iOS</strong><small>iPhone e iPad</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="cast" aria-hidden="true"></i></span><strong>Chromecast</strong><small>Pelo celular</small><span class="platform-status">Como usar</span></article>
+              </div>
+            </div>
+            <div class="platform-category">
+              <h4><i data-lucide="laptop" aria-hidden="true"></i> Computador</h4>
+              <div class="platform-grid">
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="panels-top-left" aria-hidden="true"></i></span><strong>Windows</strong><small>PC</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo" aria-hidden="true"><i data-lucide="apple" aria-hidden="true"></i></span><strong>macOS</strong><small>Mac</small><span class="platform-status">Disponível</span></article>
+            <article class="platform-card"><span class="platform-logo brand-small" aria-hidden="true"><i data-lucide="square-terminal" aria-hidden="true"></i></span><strong>Linux (PC)</strong><small>Ubuntu, Mint, Debian…</small><span class="platform-status">Disponível</span></article>
+              </div>
+            </div>
+          </div>
+          <p class="platform-note">* As opções variam conforme marca, modelo, versão do sistema e aplicativo. O Downloader/NTDown é um método de instalação, não um dispositivo. WhaleOS ainda está em análise.</p>
+        </div>
         <div class="partner-gallery" id="aplicativos">
           <div class="partner-gallery-heading">
             <div>
@@ -522,8 +595,8 @@
               <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>Lótus</strong></div>
             </article>
             <article class="app-logo-card">
-              <div class="app-logo-frame"><img src="images.jpg" alt="Marca Vuser" loading="lazy" decoding="async"></div>
-              <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>Vuser</strong></div>
+              <div class="app-logo-frame"><img src="zuxo-logo.svg" alt="Marca Zuxo Player" loading="lazy" decoding="async"></div>
+              <div class="app-meta"><span class="app-meta-kicker">APLICATIVO COMPATÍVEL</span><strong>Zuxo</strong></div>
             </article>
           </div>
           <p class="partner-gallery-disclaimer"><i data-lucide="info" aria-hidden="true"></i> Esses aplicativos são de terceiros. Disponibilidade, licenças e recursos variam conforme o dispositivo; as marcas pertencem aos respectivos titulares.</p>

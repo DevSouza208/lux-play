@@ -433,6 +433,18 @@
     @media(max-width:520px){.platform-gallery{margin-top:48px}.platform-intro h3{font-size:2rem}.platform-grid,.platform-split .platform-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.platform-card{min-height:149px;padding:14px 8px;border-radius:15px}.platform-logo{font-size:1.42rem}.platform-logo.brand-small{font-size:1.13rem}.platform-logo.brand-long{font-size:.95rem}.platform-logo svg{width:33px;height:33px}.platform-card strong{font-size:.83rem}.platform-card small{font-size:.69rem}}
     @media(prefers-reduced-motion:reduce){.platform-card{transition:none}}
 
+
+    /* Miniaturas dos aparelhos substituem os antigos botões sem duplicar a lista de plataformas. */
+    .device-illustrations{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:29px 0 4px;width:100%;max-width:550px}
+    .mini-device{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;margin:0;text-align:center}
+    .mini-device-art{position:relative;display:grid;place-items:center;width:100%;height:100px;isolation:isolate}
+    .mini-device-art:before{content:"";position:absolute;inset:34% 2% 2%;background:radial-gradient(ellipse,rgba(150,70,244,.2),transparent 67%);filter:blur(5px);z-index:-1;pointer-events:none}
+    .mini-device-art svg{display:block;width:100%;height:100%;max-width:104px;filter:drop-shadow(0 10px 8px rgba(0,0,0,.38))}
+    .mini-device figcaption{font:700 .71rem/1.25 "DM Sans",sans-serif;color:#cbb6dc;white-space:nowrap}
+    .platform-gallery{margin-top:62px}
+    @media(max-width:780px){.device-illustrations{max-width:560px;gap:8px}.platform-gallery{margin-top:50px}}
+    @media(max-width:520px){.device-illustrations{gap:3px;margin-top:22px}.mini-device-art{height:74px}.mini-device figcaption{font-size:.59rem}.platform-gallery{margin-top:44px}}
+
   </style>
 </head>
 <body>
@@ -505,17 +517,81 @@
             <span class="eyebrow">EM QUALQUER TELA</span>
             <h2>Escolha o lugar.<br><span class="gradient">A gente leva a diversão.</span></h2>
             <p>Do sofá ao celular: encontre uma forma de assistir que combine com o seu dispositivo. Nossa equipe ajuda você a escolher um aplicativo compatível e configurar seu acesso.</p>
-            <div class="experience-devices" aria-label="Dispositivos compatíveis">
-              <span><i data-lucide="tv" aria-hidden="true"></i> Smart TV</span>
-              <span><i data-lucide="smartphone" aria-hidden="true"></i> Celular</span>
-              <span><i data-lucide="tablet" aria-hidden="true"></i> Tablet</span>
-              <span><i data-lucide="laptop" aria-hidden="true"></i> Computador</span>
-              <span><i data-lucide="monitor-play" aria-hidden="true"></i> TV Box</span>
+            <div class="device-illustrations" aria-label="Assista no celular, Smart TV, computador, Xbox ou TV Box">
+              <figure class="mini-device">
+                <div class="mini-device-art" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" fill="none" focusable="false">
+                    <defs><linearGradient id="lux-phone" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4c2080"/><stop offset="1" stop-color="#120b27"/></linearGradient></defs>
+                    <rect x="27" y="5" width="46" height="88" rx="11" fill="#0c0915" stroke="#c69aff" stroke-width="3"/>
+                    <rect x="32" y="15" width="36" height="66" rx="5" fill="url(#lux-phone)"/>
+                    <rect x="43" y="9" width="14" height="2.5" rx="1.25" fill="#a67cbe"/>
+                    <circle cx="50" cy="86.5" r="2.3" fill="#a983cd"/>
+                    <circle cx="50" cy="47" r="15" stroke="#cc9cff" stroke-opacity=".45"/>
+                    <path d="M46 38 59 47 46 56Z" fill="#d9b4ff"/>
+                    <path d="M37 69h26" stroke="#a880cb" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+                  </svg>
+                </div>
+                <figcaption>Celular</figcaption>
+              </figure>
+              <figure class="mini-device">
+                <div class="mini-device-art" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" fill="none" focusable="false">
+                    <defs><linearGradient id="lux-tv" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6d35aa"/><stop offset="1" stop-color="#15112c"/></linearGradient></defs>
+                    <rect x="4" y="16" width="92" height="59" rx="7" fill="#0b0915" stroke="#c69aff" stroke-width="3"/>
+                    <rect x="9" y="21" width="82" height="49" rx="3" fill="url(#lux-tv)"/>
+                    <path d="M44 76v10m12-10v10M34 88h32" stroke="#bfa0db" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="50" cy="45" r="14" stroke="#d3a5ff" stroke-opacity=".45"/>
+                    <path d="M46 36 59 45 46 54Z" fill="#ebd4ff"/>
+                    <path d="M17 64h18m5 0h12" stroke="#a87ed0" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+                  </svg>
+                </div>
+                <figcaption>Smart TV</figcaption>
+              </figure>
+              <figure class="mini-device">
+                <div class="mini-device-art" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" fill="none" focusable="false">
+                    <defs><linearGradient id="lux-pc" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5f2d99"/><stop offset="1" stop-color="#100d23"/></linearGradient></defs>
+                    <rect x="9" y="15" width="82" height="60" rx="5" fill="#100b1c" stroke="#c59aff" stroke-width="3"/>
+                    <rect x="14" y="20" width="72" height="50" rx="2" fill="url(#lux-pc)"/>
+                    <path d="M43 75v10m14-10v10M33 87h34" stroke="#c49edc" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="50" cy="43" r="13" stroke="#c99eff" stroke-opacity=".5"/>
+                    <path d="m47 35 12 8-12 8Z" fill="#e7ccff"/>
+                    <path d="M20 63h12m4 0h17" stroke="#c89cff" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                  </svg>
+                </div>
+                <figcaption>Computador</figcaption>
+              </figure>
+              <figure class="mini-device">
+                <div class="mini-device-art" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" fill="none" focusable="false">
+                    <defs><linearGradient id="lux-xbox" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#443054"/><stop offset="1" stop-color="#0d0c14"/></linearGradient></defs>
+                    <rect x="32" y="7" width="39" height="82" rx="6" fill="url(#lux-xbox)" stroke="#b996d9" stroke-width="2.5"/>
+                    <path d="M39 16h25M39 20h25M39 24h25" stroke="#947ba8" stroke-opacity=".5" stroke-width="1.6"/>
+                    <circle cx="51.5" cy="47" r="13" stroke="#cfb3e5" stroke-width="2"/>
+                    <path d="m45 40 13 14m0-14L45 54" stroke="#e6d0fc" stroke-width="3.8" stroke-linecap="round"/>
+                    <circle cx="60" cy="77" r="2" fill="#c596ff"/>
+                    <path d="M31 75c-9-2-15 4-17 11-1 4 4 7 8 5l7-5h13l7 5c4 2 9-1 8-5" fill="#21162d" stroke="#9e7bb5" stroke-width="2.2"/>
+                    <path d="M25 80v8m-4-4h8" stroke="#d1addf" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <figcaption>Xbox</figcaption>
+              </figure>
+              <figure class="mini-device">
+                <div class="mini-device-art" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" fill="none" focusable="false">
+                    <defs><linearGradient id="lux-box" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#46305e"/><stop offset="1" stop-color="#100e1d"/></linearGradient></defs>
+                    <path d="M19 37 71 29 88 44 35 55Z" fill="#61437f" stroke="#c59af5" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M19 37 35 55v23L19 61Z" fill="#322043" stroke="#b08cda" stroke-width="2"/>
+                    <path d="M35 55 88 44v26L35 78Z" fill="url(#lux-box)" stroke="#b08cda" stroke-width="2"/>
+                    <circle cx="78" cy="61" r="2.5" fill="#ca88ff"/>
+                    <path d="M46 65h20" stroke="#7c5b9a" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M40 39c6-5 18-5 25-2" stroke="#cba3ff" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+                    <path d="M45 34c3-2 10-3 15-2" stroke="#cba3ff" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                  </svg>
+                </div>
+                <figcaption>TV Box</figcaption>
+              </figure>
             </div>
-            <a href="https://wa.me/5511980024737" data-whatsapp="suporte" target="_blank" rel="noopener noreferrer" class="btn btn-quiet device-advisor">
-              <i data-lucide="message-circle" aria-hidden="true"></i> Qual app funciona no meu aparelho? <i data-lucide="arrow-up-right" aria-hidden="true"></i>
-            </a>
-            <p class="experience-footnote">* A compatibilidade depende do aparelho, do sistema e do aplicativo escolhido.</p>
           </div>
           <div class="device-stage" aria-label="Garoto Lux estiloso apresentando a experiência da Lux Play">
             <div class="device-stage-grid" aria-hidden="true"></div>
@@ -528,10 +604,6 @@
         </div>
 
         <div class="platform-gallery" id="plataformas">
-          <div class="platform-intro">
-            <div><span class="eyebrow">PLATAFORMAS E DISPOSITIVOS</span><h3>Tem uma tela? <span>Tem um jeito de assistir.</span></h3></div>
-            <p>Encontre o sistema do seu aparelho e conheça as opções de aplicativos para a Lux Play. Nossa equipe ajuda com a escolha e a configuração.</p>
-          </div>
           <div class="platform-category">
             <h4><i data-lucide="tv" aria-hidden="true"></i> Smart TVs, TV Box e consoles</h4>
             <div class="platform-grid">
